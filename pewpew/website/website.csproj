@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="Script\Common.js" />
+    <Content Include="Script\gamepieces.js" />
     <Content Include="Script\jquery.hotkeys-0.7.9.min.js" />
     <Content Include="Style.css" />
     <Content Include="Web.config" />
