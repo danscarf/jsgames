@@ -11,3 +11,6 @@ var PLAYER_START_POSITION = 100;
 
 var textX = 50;
 var textY = 50;
+
+
+var bulletJustFired = false;
