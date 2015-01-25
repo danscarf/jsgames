@@ -92,7 +92,12 @@ function update() {
 
     // Handle enemy bombs
     for (b in bombList) {
-        if (bombList[b].update)
+        if (bombList[b].y && bombList[b].y > CANVAS_HEIGHT) {
+            if (bombList[b].reset)
+                bombList[b].reset();
+            bombList.shift();
+        }
+        else if (bombList[b].update)
             bombList[b].update();
     }
     // End handling enemy bombs
@@ -130,6 +135,12 @@ function draw() {
         if (missileList[m].draw)
             missileList[m].draw();
     }
+
+    for (b in bombList) {
+        if (bombList[b].draw)
+            bombList[b].draw();
+    }
+
 }
 
 $(function () {

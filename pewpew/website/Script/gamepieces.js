@@ -148,12 +148,27 @@ Enemy.prototype = {
         }
         ENEMY_CURRENT_POSITION += ENEMY_MOVE_DISTANCE * this.direction;
 
-        var current = Date.now();
-        if (current >= this.bombDropTime) {
-            console.log('Time to drop a bomb');
-            this.bombDropTime = randomDropTime(250, 2000);
-        }
+        // Do all bomb dropping logic here.
 
+        // If there's no room on the board for more bombs, don't
+        // even bother.
+        if (bombList.length < MAX_BOMBS) {
+
+            // Determine if it's time to drop...
+            var current = Date.now();
+            if (current >= this.bombDropTime) {
+                // console.log('Time to drop a bomb');
+
+                var b = new Bomb(context, this.y);
+                if (b.init)
+                    b.init();
+                b.x = ENEMY_CURRENT_POSITION;
+                bombList.push(b);
+                // Finally, set up for the next bomb.
+                this.bombDropTime = randomDropTime(250, 750);
+            }
+        }
+        // End bomb dropping logic.
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
@@ -177,7 +192,8 @@ Enemy.prototype = {
 
 function Bomb(a, b) {
     GamePiece.call(this, a);
-    this.varContext = b;
+    // this.varContext = b;
+    this.y = b + ENEMY_HEIGHT;
 }
 
 Bomb.prototype = {
@@ -192,13 +208,12 @@ Bomb.prototype = {
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of Bomb gamepiece
-        this.x = ENEMY_CURRENT_POSITION + (ENEMY_WIDTH /2);
-        this.y = ENEMY_HEIGHT;
-
-        console.log('Bomb init');
+        this.x = ENEMY_CURRENT_POSITION + (ENEMY_WIDTH / 2);
+        // console.log('Bomb init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
+        this.y += BOMB_MOVE_DISTANCE;
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);

@@ -40,7 +40,8 @@ var bulletJustFired = false;
 var BOMB_COLOR = "#0000FF";
 var BOMB_WIDTH = 2;
 var BOMB_HEIGHT = 6;
-var MAX_BOMBS = 3;
+var MAX_BOMBS = 10;
+var BOMB_MOVE_DISTANCE = 14;
 
 
 function randomDropTime(min, max) {
