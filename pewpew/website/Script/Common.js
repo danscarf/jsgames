@@ -39,7 +39,8 @@ $(document).ready(function () {
             // Build the missileList list
             missileList = [];
 
-
+            // Build the bombList list
+            bombList = [];
 
             setIntervalId = setInterval(function () {
                 update();
@@ -74,6 +75,9 @@ function update() {
             objectList[x].update();
     }
 
+    // Handle player missile movement by checking to see if
+    // the highest missile has reached the upper bounds and
+    // needs to be removed.
     for (m in missileList) {
         if (missileList[m].missileY && missileList[m].missileY <= 0) {
             if (missileList[m].reset)
@@ -84,7 +88,14 @@ function update() {
         else if (missileList[m].update)
             missileList[m].update();
     }
+    // End missile movement handling
 
+    // Handle enemy bombs
+    for (b in bombList) {
+        if (bombList[b].update)
+            bombList[b].update();
+    }
+    // End handling enemy bombs
 
     // Handle laser firing
     // Need to ensure only one laser fire per space key. Otherwise
@@ -100,15 +111,12 @@ function update() {
                 missile.init();
             missileList.push(missile);
             bulletJustFired = true;
-        }
-
-     
+        }     
     }
     if (!keydown.space && bulletJustFired == true) {
         bulletJustFired = false;
     }
     // End handle laser firing
-
 }
 
 function draw() {

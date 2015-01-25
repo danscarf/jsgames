@@ -1,6 +1,7 @@
 ﻿// Global objectList arrays to hold all game objects.
 var objectList = null;
 var missileList = null;
+var bombList = null;
 
 var context;
 var canvas;
@@ -27,9 +28,22 @@ var ENEMY_MOVE_DISTANCE = 5;
 var PLAYER_MISSILE_WIDTH = 2;
 var pLAYER_MISSILE_HEIGHT =6;
 var MAX_MISSILES = 3;
+var MISSILE_MOVE_DISTANCE = 7;
+
 
 var textX = 50;
 var textY = 50;
 
 
 var bulletJustFired = false;
+
+var BOMB_COLOR = "#0000FF";
+var BOMB_WIDTH = 2;
+var BOMB_HEIGHT = 6;
+var MAX_BOMBS = 3;
+
+
+function randomDropTime(min, max) {
+    var interval = Math.floor(Math.random() * (max - min + 1) + min);
+    return Date.now() + interval;
+}

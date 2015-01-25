@@ -41,7 +41,7 @@ Missile.prototype = {
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
-        this.missileY -= 7;
+        this.missileY -= MISSILE_MOVE_DISTANCE;
         // console.log('Missile update');
     },
     draw: function () {
@@ -125,12 +125,15 @@ Enemy.prototype = {
     width: ENEMY_WIDTH,
     height: ENEMY_HEIGHT,
     direction: 1,
+    bombDropTime: 0,
 
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of Enemy gamepiece
         ENEMY_CURRENT_POSITION = (CANVAS_WIDTH - ENEMY_WIDTH) / 2;
         this.y = 10;
+
+        this.bombDropTime = randomDropTime(500, 1500);
 
         console.log('Enemy init');
     },
@@ -143,8 +146,14 @@ Enemy.prototype = {
             this.direction *= -1;
             this.y += ENEMY_HEIGHT;
         }
-
         ENEMY_CURRENT_POSITION += ENEMY_MOVE_DISTANCE * this.direction;
+
+        var current = Date.now();
+        if (current >= this.bombDropTime) {
+            console.log('Time to drop a bomb');
+            this.bombDropTime = randomDropTime(250, 2000);
+        }
+
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
@@ -165,4 +174,41 @@ Enemy.prototype = {
 
 
 
+
+function Bomb(a, b) {
+    GamePiece.call(this, a);
+    this.varContext = b;
+}
+
+Bomb.prototype = {
+    varContext: null,
+    y: null,
+    x: null,
+    color: BOMB_COLOR,
+    width: BOMB_WIDTH,
+    height: BOMB_HEIGHT,
+    direction: 1,
+
+    init: function () {
+        GamePiece.prototype.init.apply(this, arguments);
+        // X position of Bomb gamepiece
+        this.x = ENEMY_CURRENT_POSITION + (ENEMY_WIDTH /2);
+        this.y = ENEMY_HEIGHT;
+
+        console.log('Bomb init');
+    },
+    update: function () {
+        GamePiece.prototype.update.apply(this, arguments);
+    },
+    draw: function () {
+        GamePiece.prototype.draw.apply(this, arguments);
+        context.fillStyle = this.color;
+        context.fillRect(this.x, this.y, this.width, this.height);
+        // console.log('Bomb draw');
+    },
+    reset: function () {
+        GamePiece.prototype.reset.apply(this, arguments);
+        // console.log('Bomb reset');
+    }
+};
 
