@@ -29,6 +29,7 @@ $(document).ready(function () {
             // Build the object list
             objectList = [];
             objectList.push(new Player(context));
+            objectList.push(new Enemy(context));
 
             for (x in objectList) {
                 if (objectList[x].init)
@@ -92,7 +93,7 @@ function update() {
 
         // Limit the total number of missiles on
         // the board at any given time.
-        if (missileList.length < 2) {
+        if (missileList.length < MAX_MISSILES) {
             // console.log('Pew!');
             var missile = new Missile(context);
             if (missile.init)

@@ -18,6 +18,8 @@ function extend(child, supertype) {
 }
 extend(Missile, GamePiece);
 extend(Player, GamePiece);
+extend(Enemy, GamePiece);
+
 
 function Missile(a, b) {
     GamePiece.call(this, a);
@@ -70,7 +72,7 @@ Player.prototype = {
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of player gamepiece
-        PLAYER_CURRENT_POSITION = PLAYER_START_POSITION;
+        PLAYER_CURRENT_POSITION = (CANVAS_WIDTH - PLAYER_WIDTH) / 2;
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
 
         console.log('Player init');
@@ -98,3 +100,69 @@ Player.prototype = {
         // console.log('Player reset');
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Enemy(a, b) {
+    GamePiece.call(this, a);
+    this.varContext = b;
+}
+
+Enemy.prototype = {
+    varContext: null,
+    y: null,
+    color: ENEMY_COLOR,
+    width: ENEMY_WIDTH,
+    height: ENEMY_HEIGHT,
+    direction: 1,
+
+    init: function () {
+        GamePiece.prototype.init.apply(this, arguments);
+        // X position of Enemy gamepiece
+        ENEMY_CURRENT_POSITION = (CANVAS_WIDTH - ENEMY_WIDTH) / 2;
+        this.y = 10;
+
+        console.log('Enemy init');
+    },
+    update: function () {
+        GamePiece.prototype.update.apply(this, arguments);
+
+        // Do we need to reverse direction?
+        if (ENEMY_CURRENT_POSITION + ENEMY_WIDTH > CANVAS_WIDTH
+            || ENEMY_CURRENT_POSITION < 0) {
+            this.direction *= -1;
+            this.y += ENEMY_HEIGHT;
+        }
+
+        ENEMY_CURRENT_POSITION += ENEMY_MOVE_DISTANCE * this.direction;
+    },
+    draw: function () {
+        GamePiece.prototype.draw.apply(this, arguments);
+        context.fillStyle = this.color;
+        context.fillRect(ENEMY_CURRENT_POSITION, this.y, this.width, this.height);
+        // console.log('Enemy draw');
+    },
+    reset: function () {
+        GamePiece.prototype.reset.apply(this, arguments);
+        // console.log('Enemy reset');
+    }
+};
+
+
+
+
+
+
+
+
+
