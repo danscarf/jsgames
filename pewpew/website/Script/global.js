@@ -11,6 +11,10 @@ var CANVAS_WIDTH = 600;
 var CANVAS_HEIGHT = 400;
 
 var PLAYER_MOVE_DISTANCE = 5;
+
+// Used for missile launching.
+// Figure out how to get rid
+// of this variable.
 var PLAYER_CURRENT_POSITION;
 
 var PLAYER_WIDTH = 30;
@@ -22,7 +26,6 @@ var ENEMY_COLOR = "#FFFF00";
 
 var ENEMY_WIDTH = 30;
 var ENEMY_HEIGHT = 20;
-var ENEMY_CURRENT_POSITION;
 var ENEMY_MOVE_DISTANCE = 5;
 
 var PLAYER_MISSILE_WIDTH = 2;

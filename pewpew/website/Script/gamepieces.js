@@ -49,7 +49,7 @@ Missile.prototype = {
         GamePiece.prototype.init.apply(this, arguments);
         this.x = PLAYER_CURRENT_POSITION + (PLAYER_WIDTH / 2);
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
-        // console.log('Missile init');
+        console.log('Missile init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
@@ -85,8 +85,7 @@ Player.prototype = {
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of player gamepiece
-        PLAYER_CURRENT_POSITION = (CANVAS_WIDTH - PLAYER_WIDTH) / 2;
-        this.x = PLAYER_CURRENT_POSITION;
+        this.x = (CANVAS_WIDTH - PLAYER_WIDTH) / 2;
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
 
         console.log('Player init');
@@ -94,15 +93,15 @@ Player.prototype = {
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
         if (keydown.left) {
-            PLAYER_CURRENT_POSITION -= PLAYER_MOVE_DISTANCE;
+            this.x -= PLAYER_MOVE_DISTANCE;
         }
 
         if (keydown.right) {
-            PLAYER_CURRENT_POSITION += PLAYER_MOVE_DISTANCE;
+            this.x += PLAYER_MOVE_DISTANCE;
         }
 
-        PLAYER_CURRENT_POSITION = PLAYER_CURRENT_POSITION.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
-        this.x = PLAYER_CURRENT_POSITION;
+        this.x = this.x.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
+        PLAYER_CURRENT_POSITION = this.x;
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
@@ -146,8 +145,7 @@ Enemy.prototype = {
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of Enemy gamepiece
-        ENEMY_CURRENT_POSITION = (CANVAS_WIDTH - ENEMY_WIDTH) / 2;
-        this.x = ENEMY_CURRENT_POSITION;
+        this.x = ENEMY_WIDTH;
         this.y = 10;
 
         this.bombDropTime = randomDropTime(500, 1500);
@@ -158,13 +156,12 @@ Enemy.prototype = {
         GamePiece.prototype.update.apply(this, arguments);
 
         // Do we need to reverse direction?
-        if (ENEMY_CURRENT_POSITION + ENEMY_WIDTH > CANVAS_WIDTH
-            || ENEMY_CURRENT_POSITION < 0) {
+        if (this.x + ENEMY_WIDTH > CANVAS_WIDTH
+            || this.x < 0) {
             this.direction *= -1;
             this.y += ENEMY_HEIGHT;
         }
-        ENEMY_CURRENT_POSITION += ENEMY_MOVE_DISTANCE * this.direction;
-        this.x = ENEMY_CURRENT_POSITION;
+        this.x += ENEMY_MOVE_DISTANCE * this.direction;
         // Do all bomb dropping logic here.
 
         // If there's no room on the board for more bombs, don't
@@ -176,7 +173,7 @@ Enemy.prototype = {
             if (current >= this.bombDropTime) {
                 // console.log('Time to drop a bomb');
 
-                var b = new Bomb(context, this.y);
+                var b = new Bomb(context, this.x, this.y);
                 if (b.init)
                     b.init();
                 b.x = this.x;
@@ -207,10 +204,10 @@ Enemy.prototype = {
 
 
 
-function Bomb(a, b) {
+function Bomb(a, b, c) {
     GamePiece.call(this, a);
-    // this.varContext = b;
-    this.y = b + ENEMY_HEIGHT;
+    this.x = b;
+    this.y = c + ENEMY_HEIGHT;
 }
 
 Bomb.prototype = {
@@ -225,7 +222,7 @@ Bomb.prototype = {
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of Bomb gamepiece
-        this.x = ENEMY_CURRENT_POSITION + (ENEMY_WIDTH / 2);
+        this.x += (ENEMY_WIDTH / 2);
         // console.log('Bomb init');
     },
     update: function () {
