@@ -47,9 +47,9 @@ Missile.prototype = {
     y: null,
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
-        this.x = PLAYER_CURRENT_POSITION + (PLAYER_WIDTH / 2);
+        this.x += (PLAYER_WIDTH / 2);
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
-        console.log('Missile init');
+        // console.log('Missile init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
@@ -101,7 +101,40 @@ Player.prototype = {
         }
 
         this.x = this.x.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
-        PLAYER_CURRENT_POSITION = this.x;
+        // PLAYER_CURRENT_POSITION = this.x;
+
+
+
+
+        // Handle laser firing
+        // Need to ensure only one laser fire per space key. Otherwise
+        // you'd get a continuous stream of lasers when you hold the space down.
+        if (keydown.space && bulletJustFired == false) {
+
+            // Limit the total number of missiles on
+            // the board at any given time.
+            if (missileList.length < MAX_MISSILES) {
+                // console.log('Pew!');
+                var missile = new Missile(context);
+                missile.x = this.x;
+                if (missile.init)
+                    missile.init();
+                missileList.push(missile);
+                bulletJustFired = true;
+            }
+        }
+        if (!keydown.space && bulletJustFired == true) {
+            bulletJustFired = false;
+        }
+        // End handle laser firing
+
+
+
+
+
+
+
+
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);

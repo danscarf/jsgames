@@ -15,7 +15,7 @@ var PLAYER_MOVE_DISTANCE = 5;
 // Used for missile launching.
 // Figure out how to get rid
 // of this variable.
-var PLAYER_CURRENT_POSITION;
+// var PLAYER_CURRENT_POSITION;
 
 var PLAYER_WIDTH = 30;
 var PLAYER_HEIGHT = 20;

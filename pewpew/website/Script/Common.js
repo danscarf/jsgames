@@ -102,28 +102,6 @@ function update() {
     }
     // End handling enemy bombs
 
-    // Handle laser firing
-    // Need to ensure only one laser fire per space key. Otherwise
-    // you'd get a continuous stream of lasers when you hold the space down.
-    if (keydown.space && bulletJustFired == false) {
-
-        // Limit the total number of missiles on
-        // the board at any given time.
-        if (missileList.length < MAX_MISSILES) {
-            // console.log('Pew!');
-            var missile = new Missile(context);
-            if (missile.init)
-                missile.init();
-            missileList.push(missile);
-            bulletJustFired = true;
-        }
-    }
-    if (!keydown.space && bulletJustFired == true) {
-        bulletJustFired = false;
-    }
-    // End handle laser firing
-
-
     // Handle collisions
 
     //Bombs and Player
