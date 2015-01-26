@@ -3,13 +3,6 @@
     return Date.now() + interval;
 }
 
-function collides(a, b) {
-    return a.x < b.x + b.width &&
-           a.x + a.width > b.x &&
-           a.y < b.y + b.height &&
-           a.y + a.height > b.y;
-}
-
 function GamePiece(a) {
     this.varContext = a;
 }
@@ -81,7 +74,6 @@ Player.prototype = {
     width: PLAYER_WIDTH,
     height: PLAYER_HEIGHT,
 
-
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of player gamepiece
@@ -101,10 +93,6 @@ Player.prototype = {
         }
 
         this.x = this.x.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
-        // PLAYER_CURRENT_POSITION = this.x;
-
-
-
 
         // Handle laser firing
         // Need to ensure only one laser fire per space key. Otherwise
@@ -127,14 +115,6 @@ Player.prototype = {
             bulletJustFired = false;
         }
         // End handle laser firing
-
-
-
-
-
-
-
-
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
@@ -147,17 +127,6 @@ Player.prototype = {
         // console.log('Player reset');
     }
 };
-
-
-
-
-
-
-
-
-
-
-
 
 
 function Enemy(a, b) {
@@ -230,13 +199,6 @@ Enemy.prototype = {
 };
 
 
-
-
-
-
-
-
-
 function Bomb(a, b, c) {
     GamePiece.call(this, a);
     this.x = b;
@@ -273,4 +235,3 @@ Bomb.prototype = {
         // console.log('Bomb reset');
     }
 };
-
