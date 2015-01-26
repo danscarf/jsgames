@@ -1,4 +1,16 @@
-﻿function GamePiece(a) {
+﻿function randomDropTime(min, max) {
+    var interval = Math.floor(Math.random() * (max - min + 1) + min);
+    return Date.now() + interval;
+}
+
+function collides(a, b) {
+    return a.x < b.x + b.width &&
+           a.x + a.width > b.x &&
+           a.y < b.y + b.height &&
+           a.y + a.height > b.y;
+}
+
+function GamePiece(a) {
     this.varContext = a;
 }
 GamePiece.prototype = {
@@ -31,23 +43,23 @@ Missile.prototype = {
     width: PLAYER_MISSILE_WIDTH,
     height: pLAYER_MISSILE_HEIGHT,
     color: MISSILE_COLOR,
-    missileX: null,
-    missileY: null,
+    x: null,
+    y: null,
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
-        this.missileX = PLAYER_CURRENT_POSITION + (PLAYER_WIDTH / 2);
-        this.missileY = CANVAS_HEIGHT - PLAYER_HEIGHT;
+        this.x = PLAYER_CURRENT_POSITION + (PLAYER_WIDTH / 2);
+        this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
         // console.log('Missile init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
-        this.missileY -= MISSILE_MOVE_DISTANCE;
+        this.y -= MISSILE_MOVE_DISTANCE;
         // console.log('Missile update');
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
         context.fillStyle = this.color;
-        context.fillRect(this.missileX, this.missileY, this.width, this.height);
+        context.fillRect(this.x, this.y, this.width, this.height);
         // console.log('Missile draw');
     },
     reset: function () {
@@ -63,6 +75,7 @@ function Player(a, b) {
 
 Player.prototype = {
     varContext: null,
+    x: null,
     y: null,
     color: PLAYER_COLOR,
     width: PLAYER_WIDTH,
@@ -73,6 +86,7 @@ Player.prototype = {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of player gamepiece
         PLAYER_CURRENT_POSITION = (CANVAS_WIDTH - PLAYER_WIDTH) / 2;
+        this.x = PLAYER_CURRENT_POSITION;
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
 
         console.log('Player init');
@@ -88,11 +102,12 @@ Player.prototype = {
         }
 
         PLAYER_CURRENT_POSITION = PLAYER_CURRENT_POSITION.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
+        this.x = PLAYER_CURRENT_POSITION;
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
         context.fillStyle = this.color;
-        context.fillRect(PLAYER_CURRENT_POSITION, this.y, this.width, this.height);
+        context.fillRect(this.x, this.y, this.width, this.height);
         // console.log('Player draw');
     },
     reset: function () {
@@ -121,6 +136,7 @@ function Enemy(a, b) {
 Enemy.prototype = {
     varContext: null,
     y: null,
+    x: null,
     color: ENEMY_COLOR,
     width: ENEMY_WIDTH,
     height: ENEMY_HEIGHT,
@@ -131,6 +147,7 @@ Enemy.prototype = {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of Enemy gamepiece
         ENEMY_CURRENT_POSITION = (CANVAS_WIDTH - ENEMY_WIDTH) / 2;
+        this.x = ENEMY_CURRENT_POSITION;
         this.y = 10;
 
         this.bombDropTime = randomDropTime(500, 1500);
@@ -147,7 +164,7 @@ Enemy.prototype = {
             this.y += ENEMY_HEIGHT;
         }
         ENEMY_CURRENT_POSITION += ENEMY_MOVE_DISTANCE * this.direction;
-
+        this.x = ENEMY_CURRENT_POSITION;
         // Do all bomb dropping logic here.
 
         // If there's no room on the board for more bombs, don't
@@ -162,7 +179,7 @@ Enemy.prototype = {
                 var b = new Bomb(context, this.y);
                 if (b.init)
                     b.init();
-                b.x = ENEMY_CURRENT_POSITION;
+                b.x = this.x;
                 bombList.push(b);
                 // Finally, set up for the next bomb.
                 this.bombDropTime = randomDropTime(250, 750);
@@ -173,7 +190,7 @@ Enemy.prototype = {
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
         context.fillStyle = this.color;
-        context.fillRect(ENEMY_CURRENT_POSITION, this.y, this.width, this.height);
+        context.fillRect(this.x, this.y, this.width, this.height);
         // console.log('Enemy draw');
     },
     reset: function () {

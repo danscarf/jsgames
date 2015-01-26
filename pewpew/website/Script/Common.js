@@ -79,7 +79,7 @@ function update() {
     // the highest missile has reached the upper bounds and
     // needs to be removed.
     for (m in missileList) {
-        if (missileList[m].missileY && missileList[m].missileY <= 0) {
+        if (missileList[m].y && missileList[m].y <= 0) {
             if (missileList[m].reset)
                 missileList[m].reset();
             missileList.shift();
@@ -116,12 +116,44 @@ function update() {
                 missile.init();
             missileList.push(missile);
             bulletJustFired = true;
-        }     
+        }
     }
     if (!keydown.space && bulletJustFired == true) {
         bulletJustFired = false;
     }
     // End handle laser firing
+
+
+    // Handle collisions
+
+    //Bombs and Player
+    //for (b in bombList) {
+    //    if (collides(b, pla))
+    //}
+
+    //Missiles and Enemy
+
+    // are the Enemy and Player colliding?
+
+
+
+    //playerBullets.forEach(function (bullet) {
+    //    enemies.forEach(function (enemy) {
+    //        if (collides(bullet, enemy)) {
+    //            enemy.explode();
+    //            bullet.active = false;
+    //        }
+    //    });
+    //});
+
+    //enemies.forEach(function (enemy) {
+    //    if (collides(enemy, player)) {
+    //        enemy.explode();
+    //        player.explode();
+    //    }
+    //});
+    // End handling collisions
+
 }
 
 function draw() {
