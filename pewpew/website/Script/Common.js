@@ -118,8 +118,10 @@ function update() {
     if (bombList.length > 0) {
         objectList.forEach(function (o) {
             if (collides(o, bombList[0])) {
-                console.log('Bomb collision detected!');
+                // console.log('Bomb collision detected!');
                 bombList.shift();
+                if (objectList[0].explode)
+                    objectList[0].explode();
             }
         });
     }
@@ -131,8 +133,10 @@ function update() {
     if (missileList.length > 0) {
         objectList.forEach(function (o) {
             if (collides(o, missileList[0])) {
-                console.log('Missile collision detected!');
+                // console.log('Missile collision detected!');
                 missileList.shift();
+                if (o.explode)
+                    o.explode();
             }
         });
     }
@@ -145,7 +149,9 @@ function update() {
     // 1. Only using one enemy and
     // 2. Storing enemy and player in the same objectlist array
     if (collides(objectList[0], objectList[1])) {
-        console.log('Player/enemy collision detected!');
+        // console.log('Player/enemy collision detected!');
+        if (objectList[0].explode)
+            objectList[0].explode();
     }
     // End handling collisions
 }

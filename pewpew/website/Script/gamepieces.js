@@ -16,6 +16,8 @@ GamePiece.prototype = {
     { },
     reset: function ()
     { },
+    explode: function ()
+    { },
 };
 
 function extend(child, supertype) {
@@ -24,6 +26,7 @@ function extend(child, supertype) {
 extend(Missile, GamePiece);
 extend(Player, GamePiece);
 extend(Enemy, GamePiece);
+extend(Bomb, GamePiece);
 
 
 function Missile(a, b) {
@@ -58,6 +61,10 @@ Missile.prototype = {
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         // console.log('Missile reset');
+    },
+    explode: function () {
+        GamePiece.prototype.explode.apply(this, arguments);
+        // console.log('Missile explode');
     }
 };
 
@@ -125,6 +132,10 @@ Player.prototype = {
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         // console.log('Player reset');
+    },
+    explode: function () {
+        GamePiece.prototype.explode.apply(this, arguments);
+        console.log('Player explode');
     }
 };
 
@@ -195,6 +206,10 @@ Enemy.prototype = {
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         // console.log('Enemy reset');
+    },
+    explode: function () {
+        GamePiece.prototype.explode.apply(this, arguments);
+        console.log('Enemy explode');
     }
 };
 
@@ -233,5 +248,9 @@ Bomb.prototype = {
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         // console.log('Bomb reset');
+    },
+    explode: function () {
+        GamePiece.prototype.explode.apply(this, arguments);
+        console.log('Bomb explode');
     }
 };
