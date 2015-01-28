@@ -172,7 +172,6 @@ function draw() {
         if (bombList[b].draw)
             bombList[b].draw();
     }
-
 }
 
 $(function () {
@@ -190,4 +189,3 @@ $(function () {
         keydown[keyName(event)] = false;
     });
 });
-
