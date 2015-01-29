@@ -5,9 +5,11 @@
 
 function GamePiece(a) {
     this.varContext = a;
+    this.shouldDelete = false;
 }
 GamePiece.prototype = {
     varContext: null,
+    shouldDelete: null,
     init: function ()
     { },
     update: function ()
@@ -17,7 +19,7 @@ GamePiece.prototype = {
     reset: function ()
     { },
     explode: function ()
-    { },
+    { }
 };
 
 function extend(child, supertype) {
