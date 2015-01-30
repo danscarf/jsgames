@@ -1,4 +1,8 @@
-﻿function randomDropTime(min, max) {
+﻿function checkShouldDelete(value) {
+    return ! value.shouldDelete;
+}
+
+function randomDropTime(min, max) {
     var interval = Math.floor(Math.random() * (max - min + 1) + min);
     return Date.now() + interval;
 }
@@ -16,10 +20,10 @@ GamePiece.prototype = {
     { },
     draw: function ()
     { },
-    reset: function ()
-    { },
-    explode: function ()
-    { }
+    reset: function() {
+        this.shouldDelete = true;
+    },
+    explode: function() {}
 };
 
 function extend(child, supertype) {

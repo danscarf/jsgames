@@ -15,6 +15,7 @@ Number.prototype.clamp = function (min, max) {
     return Math.min(Math.max(this, min), max);
 };
 
+
 function collides(a, b) {
     if (typeof a === "undefined")
         return false;
@@ -25,7 +26,7 @@ function collides(a, b) {
            a.x + a.width > b.x &&
            a.y < b.y + b.height &&
            a.y + a.height > b.y;
-    }
+}
 
 $(document).ready(function () {
     $("#Start").click(
@@ -90,12 +91,12 @@ function update() {
         if (missileList[m].y && missileList[m].y <= 0) {
             if (missileList[m].reset)
                 missileList[m].reset();
-            missileList.shift();
             // console.log('Found out of bounds missile');
         }
         else if (missileList[m].update)
             missileList[m].update();
     }
+    missileList = missileList.filter(checkShouldDelete);
     // End missile movement handling
 
     // Handle enemy bombs
@@ -103,11 +104,12 @@ function update() {
         if (bombList[b].y && bombList[b].y > CANVAS_HEIGHT) {
             if (bombList[b].reset)
                 bombList[b].reset();
-            bombList.shift();
         }
         else if (bombList[b].update)
             bombList[b].update();
     }
+    bombList = bombList.filter(checkShouldDelete);
+
     // End handling enemy bombs
 
     // Handle collisions
@@ -119,12 +121,13 @@ function update() {
         objectList.forEach(function (o) {
             if (collides(o, bombList[0])) {
                 // console.log('Bomb collision detected!');
-                bombList.shift();
+                bombList[0].shouldDelete = true;
                 if (objectList[0].explode)
                     objectList[0].explode();
             }
         });
     }
+    bombList = bombList.filter(checkShouldDelete);
     // End bombs and Player
 
     // Missiles and Enemy
@@ -132,13 +135,16 @@ function update() {
     // Check to see if there is a missile in flight
     if (missileList.length > 0) {
         objectList.forEach(function (o) {
-            if (collides(o, missileList[0])) {
-                // console.log('Missile collision detected!');
-                missileList.shift();
-                if (o.explode)
-                    o.explode();
-            }
+            missileList.forEach(function (m) {
+                if (collides(o, m)) {
+                    // console.log('Missile collision detected!');
+                    m.shouldDelete = true;
+                    if (o.explode)
+                        o.explode();
+                }
+            });
         });
+        missileList = missileList.filter(checkShouldDelete);
     }
     // End missiles and Enemy
 
