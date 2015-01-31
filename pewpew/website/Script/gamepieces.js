@@ -33,6 +33,7 @@ extend(Missile, GamePiece);
 extend(Player, GamePiece);
 extend(Enemy, GamePiece);
 extend(Bomb, GamePiece);
+extend(Explosion, GamePiece);
 
 
 function Missile(a, b) {
@@ -141,6 +142,9 @@ Player.prototype = {
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);
+        var explosion = new Explosion(this.varContext, this.x, this.y);
+        explosionList.push(explosion);
+        this.shouldDelete = true;
         console.log('Player explode');
     }
 };
@@ -195,7 +199,7 @@ Enemy.prototype = {
                 var b = new Bomb(context, this.x, this.y);
                 if (b.init)
                     b.init();
-                b.x = this.x;
+                // b.x = this.x;
                 bombList.push(b);
                 // Finally, set up for the next bomb.
                 this.bombDropTime = randomDropTime(250, 750);
@@ -258,5 +262,47 @@ Bomb.prototype = {
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);
         console.log('Bomb explode');
+    }
+};
+
+
+
+function Explosion(a, b, c) {
+    GamePiece.call(this, a);
+    this.x = b;
+    this.y = c;
+}
+
+Explosion.prototype = {
+    varContext: null,
+	width:  EXPLOSION_WIDTH,
+    height: EXPLOSION_HEIGHT,
+    color:  EXPLOSION_COLOR,
+    x: null,
+    y: null,
+    init: function () {
+        GamePiece.prototype.init.apply(this, arguments);
+        
+        this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
+        // console.log('Explosion init');
+    },
+    update: function () {
+        GamePiece.prototype.update.apply(this, arguments);
+        // console.log('Explosion update');
+    },
+    draw: function () {
+        GamePiece.prototype.draw.apply(this, arguments);
+        context.fillStyle = this.color;
+        context.fillRect(this.x, this.y, this.width, this.height);
+        // console.log('Explosion draw');
+    },
+    reset: function () {
+        GamePiece.prototype.reset.apply(this, arguments);
+        this.shouldDelete = true;
+        // console.log('Explosion reset');
+    },
+    explode: function () {
+        GamePiece.prototype.explode.apply(this, arguments);
+        // console.log('Explosion explode');
     }
 };

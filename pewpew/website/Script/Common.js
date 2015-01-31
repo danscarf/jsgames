@@ -17,9 +17,7 @@ Number.prototype.clamp = function (min, max) {
 
 
 function collides(a, b) {
-    if (typeof a === "undefined")
-        return false;
-    else if (typeof b === "undefined")
+    if (typeof a === "undefined" || typeof b === "undefined")
         return false;
     else
         return a.x < b.x + b.width &&
@@ -50,6 +48,9 @@ $(document).ready(function () {
 
             // Build the bombList list
             bombList = [];
+
+            // Build the explosionList list
+            explosionList = [];
 
             setIntervalId = setInterval(function () {
                 update();
@@ -159,7 +160,19 @@ function update() {
         if (objectList[0].explode)
             objectList[0].explode();
     }
+
+    objectList = objectList.filter(checkShouldDelete);
     // End handling collisions
+
+    for (e in explosionList) {
+        if (explosionList[e].y && explosionList[e].y > CANVAS_HEIGHT) {
+            if (explosionList[e].reset)
+                explosionList[e].reset();
+        }
+        else if (explosionList[e].update)
+            explosionList[e].update();
+    }
+    explosionList = explosionList.filter(checkShouldDelete);
 }
 
 function draw() {
@@ -178,6 +191,12 @@ function draw() {
         if (bombList[b].draw)
             bombList[b].draw();
     }
+
+    for (e in explosionList) {
+        if (explosionList[e].draw)
+            explosionList[e].draw();
+    }
+
 }
 
 $(function () {
