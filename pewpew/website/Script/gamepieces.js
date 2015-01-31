@@ -23,7 +23,11 @@ GamePiece.prototype = {
     reset: function() {
         this.shouldDelete = true;
     },
-    explode: function() {}
+    explode: function() {
+        var explosion = new Explosion(this.varContext, this.x, this.y);
+        explosionList.push(explosion);
+        this.shouldDelete = true;
+    }
 };
 
 function extend(child, supertype) {
@@ -142,9 +146,6 @@ Player.prototype = {
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);
-        var explosion = new Explosion(this.varContext, this.x, this.y);
-        explosionList.push(explosion);
-        this.shouldDelete = true;
         console.log('Player explode');
     }
 };
