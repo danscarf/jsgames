@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\explosion.agif" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -65,6 +66,27 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\explosion1.gif" />
+    <Content Include="images\explosion10.gif" />
+    <Content Include="images\explosion11.gif" />
+    <Content Include="images\explosion12.gif" />
+    <Content Include="images\explosion13.gif" />
+    <Content Include="images\explosion14.gif" />
+    <Content Include="images\explosion15.gif" />
+    <Content Include="images\explosion16.gif" />
+    <Content Include="images\explosion17.gif" />
+    <Content Include="images\explosion2.gif" />
+    <Content Include="images\explosion3.gif" />
+    <Content Include="images\explosion4.gif" />
+    <Content Include="images\explosion5.gif" />
+    <Content Include="images\explosion6.gif" />
+    <Content Include="images\explosion7.gif" />
+    <Content Include="images\explosion8.gif" />
+    <Content Include="images\explosion9.gif" />
+    <Content Include="images\explosionspritesheet.gif" />
+    <Content Include="images\missile-sprite.gif" />
+    <Content Include="images\tank_small.gif" />
+    <Content Include="images\UFO.gif" />
     <Content Include="index.html" />
     <Content Include="Script\Common.js" />
     <Content Include="Script\gamepieces.js" />

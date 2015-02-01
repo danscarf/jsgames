@@ -165,11 +165,7 @@ function update() {
     // End handling collisions
 
     for (e in explosionList) {
-        if (explosionList[e].y && explosionList[e].y > CANVAS_HEIGHT) {
-            if (explosionList[e].reset)
-                explosionList[e].reset();
-        }
-        else if (explosionList[e].update)
+        if (explosionList[e].update)
             explosionList[e].update();
     }
     explosionList = explosionList.filter(checkShouldDelete);
