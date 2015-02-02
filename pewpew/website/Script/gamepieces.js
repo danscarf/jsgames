@@ -320,7 +320,7 @@ Explosion.prototype = {
         // context.fillRect(this.x, this.y, this.width, this.height);
 
 
-        context.drawImage(expImg, this.spriteIndex, 0, this.spriteWidth, 100, this.x, this.y, this.width, this.height);
+        context.drawImage(expImg, this.spriteIndex, 0, this.spriteWidth, 100, this.x, this.y -25, this.width + 50, this.height + 50);
         // console.log('Explosion draw');
     },
     reset: function () {
