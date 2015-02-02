@@ -27,6 +27,9 @@ function collides(a, b) {
 }
 
 $(document).ready(function () {
+    expImg = new Image();
+    expImg.src = '/images/explosionspritesheet.gif';
+
     $("#Start").click(
         function () {
             console.log("Game started");

@@ -4,6 +4,8 @@ var missileList = null;
 var bombList = null;
 var explosionList = null;
 
+var expImg = null;
+
 
 var context;
 var canvas;
@@ -52,5 +54,3 @@ var BOMB_WIDTH = 2;
 var BOMB_HEIGHT = 6;
 var MAX_BOMBS = 10;
 var BOMB_MOVE_DISTANCE = 14;
-
-

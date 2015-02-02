@@ -276,25 +276,51 @@ function Explosion(a, b, c) {
 
 Explosion.prototype = {
     varContext: null,
-	width:  EXPLOSION_WIDTH,
+    width: EXPLOSION_WIDTH,
     height: EXPLOSION_HEIGHT,
-    color:  EXPLOSION_COLOR,
+    color: EXPLOSION_COLOR,
     x: null,
     y: null,
+    frameInterval: 117,
+    frameStartTime: Date.now(),
+    frameCount: 17,
+    frameIndex: 1,
+    spriteWidth: 72,
+    spriteIndex: 0,
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
-        
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
         // console.log('Explosion init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
+
+        // Do explosion animation
+        var now = Date.now();
+        // Have we displayed the current frame long enouth?
+        if (now >= this.frameStartTime + this.frameInterval) {
+
+            // Test whether we're at the last frame.
+            // If not, continue.
+            if (this.frameIndex <= this.frameCount) {
+                this.frameIndex++;
+                this.frameStartTime = now;
+                this.spriteIndex += this.spriteWidth;
+                console.log('Increment frame');
+            } else {
+                this.shouldDelete = true;
+            }
+
+        }
         // console.log('Explosion update');
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
-        context.fillStyle = this.color;
-        context.fillRect(this.x, this.y, this.width, this.height);
+        // context.fillStyle = this.color;
+        // context.fillRect(this.x, this.y, this.width, this.height);
+
+
+        context.drawImage(expImg, this.spriteIndex, 0, this.spriteWidth, 100, this.x, this.y, this.width, this.height);
         // console.log('Explosion draw');
     },
     reset: function () {
