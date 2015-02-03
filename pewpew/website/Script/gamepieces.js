@@ -278,7 +278,6 @@ Explosion.prototype = {
     varContext: null,
     width: EXPLOSION_WIDTH,
     height: EXPLOSION_HEIGHT,
-    color: EXPLOSION_COLOR,
     x: null,
     y: null,
     frameInterval: 117,
@@ -308,7 +307,7 @@ Explosion.prototype = {
                 this.spriteIndex += this.spriteWidth;
                 console.log('Increment frame');
             } else {
-                this.shouldDelete = true;
+                this.reset();
             }
 
         }
@@ -316,9 +315,6 @@ Explosion.prototype = {
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
-        // context.fillStyle = this.color;
-        // context.fillRect(this.x, this.y, this.width, this.height);
-
 
         context.drawImage(expImg, this.spriteIndex, 0, this.spriteWidth, 100, this.x, this.y -25, this.width + 50, this.height + 50);
         // console.log('Explosion draw');
@@ -326,7 +322,7 @@ Explosion.prototype = {
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         this.shouldDelete = true;
-        // console.log('Explosion reset');
+        console.log('Explosion reset');
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);

@@ -26,6 +26,24 @@ function collides(a, b) {
            a.y + a.height > b.y;
 }
 
+function gameOver() {
+    console.log("Game reset");
+    clearInterval(setIntervalId);
+    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    for (x in objectList) {
+        if (objectList[x].reset)
+            objectList[x].reset();
+    }
+    objectList = null;
+    bulletJustFired = false;
+
+    // Enable start button
+    $("#Start").removeClass("disabled");
+    // disable reset button
+    $("#Reset").addClass("disabled");
+}
+
 $(document).ready(function () {
     expImg = new Image();
     expImg.src = '/images/explosionspritesheet.gif';
@@ -73,22 +91,7 @@ $(document).ready(function () {
 
     $("#Reset").click(
         function () {
-            console.log("Game reset");
-            clearInterval(setIntervalId);
-            context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-            for (x in objectList) {
-                if (objectList[x].reset)
-                    objectList[x].reset();
-            }
-            objectList = null;
-            bulletJustFired = false;
-
-            // Enable start button
-            $("#Start").removeClass("disabled");
-            // disable reset button
-            $("#Reset").addClass("disabled");
-
+            gameOver();
         });//$("#Reset").click(
 
     console.log("ready!");

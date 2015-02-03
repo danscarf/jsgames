@@ -22,7 +22,6 @@ var PLAYER_HEIGHT = 20;
 var PLAYER_COLOR = "#FF0000";// Red
 var MISSILE_COLOR = "#00FF00";// Green
 var ENEMY_COLOR = "#FFFF00";// Yellow
-var EXPLOSION_COLOR = "#FF33CC";// Yellow
 
 var ENEMY_WIDTH = 30;
 var ENEMY_HEIGHT = 20;
