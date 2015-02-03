@@ -190,6 +190,13 @@ function update() {
             explosionList[e].update();
     }
     explosionList = explosionList.filter(checkShouldDelete);
+
+    // Have we blown up the last enemy? If so,
+    // add a new one.
+    if (objectList.filter(checkIsEnemy).length < 1) {
+        objectList.push(new Enemy());
+    }
+
 }
 
 function draw() {

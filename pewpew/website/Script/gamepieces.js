@@ -2,6 +2,15 @@
     return ! value.shouldDelete;
 }
 
+function checkIsPlayer(value) {
+    return value instanceof Player;
+}
+
+function checkIsEnemy(value) {
+    return value instanceof Enemy;
+}
+
+
 function randomDropTime(min, max) {
     var interval = Math.floor(Math.random() * (max - min + 1) + min);
     return Date.now() + interval;
@@ -97,8 +106,7 @@ Player.prototype = {
         // X position of player gamepiece
         this.x = (CANVAS_WIDTH - PLAYER_WIDTH) / 2;
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
-
-        console.log('Player init');
+        // console.log('Player init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
@@ -146,7 +154,7 @@ Player.prototype = {
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);
-        console.log('Player explode');
+        // console.log('Player explode');
     }
 };
 
@@ -173,8 +181,7 @@ Enemy.prototype = {
         this.y = 10;
 
         this.bombDropTime = randomDropTime(500, 1500);
-
-        console.log('Enemy init');
+        // console.log('Enemy init');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
