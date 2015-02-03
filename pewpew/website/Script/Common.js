@@ -30,6 +30,8 @@ $(document).ready(function () {
     expImg = new Image();
     expImg.src = '/images/explosionspritesheet.gif';
 
+    $("#Reset").addClass("disabled");
+
     $("#Start").click(
         function () {
             console.log("Game started");
@@ -55,10 +57,17 @@ $(document).ready(function () {
             // Build the explosionList list
             explosionList = [];
 
+            // Main game loop
             setIntervalId = setInterval(function () {
                 update();
                 draw();
             }, 1000 / FPS);
+
+            // Disable start button
+            $("#Start").addClass("disabled");
+            // Enable reset button
+            $("#Reset").removeClass("disabled");
+
         });//$("#Start").click(
 
 
@@ -74,6 +83,12 @@ $(document).ready(function () {
             }
             objectList = null;
             bulletJustFired = false;
+
+            // Enable start button
+            $("#Start").removeClass("disabled");
+            // disable reset button
+            $("#Reset").addClass("disabled");
+
         });//$("#Reset").click(
 
     console.log("ready!");
