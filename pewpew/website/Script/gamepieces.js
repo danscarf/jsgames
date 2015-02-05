@@ -1,4 +1,8 @@
-﻿function checkShouldDelete(value) {
+﻿function regenerateGamepiece(x, y) {
+    console.log('callback called: x is ' + this.x + ' and y is ' + this.y);
+}
+
+function checkShouldDelete(value) {
     return ! value.shouldDelete;
 }
 
@@ -32,8 +36,8 @@ GamePiece.prototype = {
     reset: function() {
         this.shouldDelete = true;
     },
-    explode: function() {
-        var explosion = new Explosion(this.varContext, this.x, this.y);
+    explode: function(callback) {
+        var explosion = new Explosion(this.varContext, this.x, this.y, callback);
         explosionList.push(explosion);
         this.shouldDelete = true;
     }
@@ -82,7 +86,7 @@ Missile.prototype = {
         GamePiece.prototype.reset.apply(this, arguments);
         // console.log('Missile reset');
     },
-    explode: function () {
+    explode: function (callback) {
         GamePiece.prototype.explode.apply(this, arguments);
         // console.log('Missile explode');
     }
@@ -275,10 +279,11 @@ Bomb.prototype = {
 
 
 
-function Explosion(a, b, c) {
+function Explosion(a, b, c, callback) {
     GamePiece.call(this, a);
     this.x = b;
     this.y = c;
+    this.callback = callback;
 }
 
 Explosion.prototype = {
@@ -287,12 +292,13 @@ Explosion.prototype = {
     height: EXPLOSION_HEIGHT,
     x: null,
     y: null,
-    frameInterval: 117,
+    frameInterval: 60,
     frameStartTime: Date.now(),
     frameCount: 17,
     frameIndex: 1,
     spriteWidth: 72,
     spriteIndex: 0,
+    callback: null,
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
@@ -312,7 +318,7 @@ Explosion.prototype = {
                 this.frameIndex++;
                 this.frameStartTime = now;
                 this.spriteIndex += this.spriteWidth;
-                console.log('Increment frame');
+                // console.log('Increment frame');
             } else {
                 this.reset();
             }
@@ -329,6 +335,12 @@ Explosion.prototype = {
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         this.shouldDelete = true;
+        
+        // Call callback here.
+        if (typeof (this.callback) == "function") {
+            // this.callback(this.x, this.y);
+            this.callback();
+        }
         console.log('Explosion reset');
     },
     explode: function () {

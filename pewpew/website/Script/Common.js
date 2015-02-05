@@ -38,6 +38,8 @@ function gameOver() {
     objectList = null;
     bulletJustFired = false;
 
+    ENEMY_MOVE_DISTANCE = 5;
+
     // Enable start button
     $("#Start").removeClass("disabled");
     // disable reset button
@@ -145,7 +147,12 @@ function update() {
                 // console.log('Bomb collision detected!');
                 bombList[0].shouldDelete = true;
                 if (objectList[0].explode)
-                    objectList[0].explode();
+                    objectList[0].explode(function () {
+                        // Add new player after the old one is done exploding
+                        var p = new Player();
+                        p.init();
+                        objectList.push(p);
+                    });
             }
         });
     }
@@ -162,7 +169,16 @@ function update() {
                     // console.log('Missile collision detected!');
                     m.shouldDelete = true;
                     if (o.explode)
-                        o.explode();
+                        o.explode(function () {
+                            // Have we blown up the last enemy? If so,
+                            // add a new one.
+                            if (objectList.filter(checkIsEnemy).length < 1) {
+
+                                ENEMY_MOVE_DISTANCE += 1;
+                                objectList.push(new Enemy());
+                            }
+                            // console.log('Run me after explosion is complete.');
+                        });
                 }
             });
         });
@@ -179,7 +195,19 @@ function update() {
     if (collides(objectList[0], objectList[1])) {
         // console.log('Player/enemy collision detected!');
         if (objectList[0].explode)
-            objectList[0].explode();
+            objectList[0].explode(function () {
+                // Add new player after the old one is done exploding
+                var p = new Player();
+                p.init();
+                objectList.push(p);
+            });
+        if (objectList[1].explode)
+            objectList[1].explode(function () {
+                // Add new player after the old one is done exploding
+                var e = new Enemy();
+                e.init();
+                objectList.push(e);
+            });
     }
 
     objectList = objectList.filter(checkShouldDelete);
@@ -190,13 +218,6 @@ function update() {
             explosionList[e].update();
     }
     explosionList = explosionList.filter(checkShouldDelete);
-
-    // Have we blown up the last enemy? If so,
-    // add a new one.
-    if (objectList.filter(checkIsEnemy).length < 1) {
-        objectList.push(new Enemy());
-    }
-
 }
 
 function draw() {
