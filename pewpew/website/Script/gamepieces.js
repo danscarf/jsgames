@@ -172,7 +172,6 @@ Enemy.prototype = {
     varContext: null,
     y: null,
     x: null,
-    color: ENEMY_COLOR,
     width: ENEMY_WIDTH,
     height: ENEMY_HEIGHT,
     direction: 1,
@@ -221,8 +220,7 @@ Enemy.prototype = {
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
-        context.fillStyle = this.color;
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(enemyImg, this.x, this.y);
         // console.log('Enemy draw');
     },
     reset: function () {

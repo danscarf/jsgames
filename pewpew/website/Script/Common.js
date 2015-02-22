@@ -48,7 +48,11 @@ function gameOver() {
 
 $(document).ready(function () {
     expImg = new Image();
-    expImg.src = '/images/explosionspritesheet.gif';
+    expImg.src = "/images/explosionspritesheet.gif";
+
+    enemyImg = new Image();
+    enemyImg.src = "/images/UFO.gif";
+
 
     $("#Reset").addClass("disabled");
 
