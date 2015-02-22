@@ -101,7 +101,6 @@ Player.prototype = {
     varContext: null,
     x: null,
     y: null,
-    color: PLAYER_COLOR,
     width: PLAYER_WIDTH,
     height: PLAYER_HEIGHT,
 
@@ -148,8 +147,7 @@ Player.prototype = {
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
-        context.fillStyle = this.color;
-        context.fillRect(this.x, this.y, this.width, this.height);
+        context.drawImage(playerImg, this.x, this.y);
         // console.log('Player draw');
     },
     reset: function () {

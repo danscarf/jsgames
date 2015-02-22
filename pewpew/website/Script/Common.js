@@ -53,6 +53,9 @@ $(document).ready(function () {
     enemyImg = new Image();
     enemyImg.src = "/images/UFO.gif";
 
+    playerImg = new Image();
+    playerImg.src = "/images/tank_small.gif";
+
 
     $("#Reset").addClass("disabled");
 

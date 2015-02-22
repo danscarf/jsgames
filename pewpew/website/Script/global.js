@@ -6,6 +6,7 @@ var explosionList = null;
 
 var expImg = null;
 var enemyImg = null;
+var playerImg = null;
 
 
 var context;
@@ -22,7 +23,6 @@ var PLAYER_HEIGHT = 20;
 
 var NUM_PLAYERS_REMAINING = 3;
 
-var PLAYER_COLOR = "#FF0000";// Red
 var MISSILE_COLOR = "#00FF00";// Green
 
 var ENEMY_WIDTH = 30;
