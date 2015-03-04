@@ -227,7 +227,7 @@ Enemy.prototype = {
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);
-        console.log('Enemy explode');
+        // console.log('Enemy explode');
     }
 };
 
@@ -269,7 +269,7 @@ Bomb.prototype = {
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);
-        console.log('Bomb explode');
+        // console.log('Bomb explode');
     }
 };
 
@@ -337,7 +337,7 @@ Explosion.prototype = {
             // this.callback(this.x, this.y);
             this.callback();
         }
-        console.log('Explosion reset');
+        // console.log('Explosion reset');
     },
     explode: function () {
         GamePiece.prototype.explode.apply(this, arguments);

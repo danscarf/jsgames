@@ -176,17 +176,18 @@ function update() {
                     // console.log('Missile collision detected!');
                     m.shouldDelete = true;
                     if (o.explode)
-                        o.explode(function () {
-                            // Have we blown up the last enemy? If so,
-                            // add a new one.
-                            if (objectList.filter(checkIsEnemy).length < 1) {
+                        o.explode();
+                    // console.log('Run me after explosion is complete.');
 
-                                ENEMY_MOVE_DISTANCE += 1;
-                                objectList.push(new Enemy());
-                            }
-                            // console.log('Run me after explosion is complete.');
-                        });
                 }
+                // Have we blown up the last enemy? If so,
+                // add a new one.
+                if (objectList.filter(checkIsEnemy).length < 1) {
+
+                    ENEMY_MOVE_DISTANCE += 1;
+                    objectList.push(new Enemy());
+                }
+
             });
         });
         missileList = missileList.filter(checkShouldDelete);
@@ -210,7 +211,7 @@ function update() {
             });
         if (objectList[1].explode)
             objectList[1].explode(function () {
-                // Add new player after the old one is done exploding
+                // Add new enemy after the old one is done exploding
                 var e = new Enemy();
                 e.init();
                 objectList.push(e);
