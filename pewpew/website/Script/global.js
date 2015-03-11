@@ -1,8 +1,12 @@
-﻿// Global objectList arrays to hold all game objects.
-var objectList = null;
+﻿// Global enemyList arrays to hold all game objects.
+var enemyList = null;
 var missileList = null;
 var bombList = null;
 var explosionList = null;
+
+// Only one player at a time in the game.
+// Store it in its own var.
+var Player = null;
 
 var expImg = null;
 var enemyImg = null;

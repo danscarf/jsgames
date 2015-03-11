@@ -67,8 +67,10 @@ $(document).ready(function () {
 
             // Build the object list
             objectList = [];
-            objectList.push(new Player(context));
+            // objectList.push(new Player(context));
             objectList.push(new Enemy(context));
+
+            Player = new Player(context);
 
             for (x in objectList) {
                 if (objectList[x].init)
@@ -110,6 +112,10 @@ $(document).ready(function () {
 function update() {
     //textX +=1;
     //textY += 1;
+
+    if (Player.update)
+        Player.update();
+
     for (x in objectList) {
         if (objectList[x].update)
             objectList[x].update();
