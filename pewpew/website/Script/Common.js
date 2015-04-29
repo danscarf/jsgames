@@ -16,6 +16,12 @@ Number.prototype.clamp = function (min, max) {
 };
 
 
+
+function isReal(obj) {
+    return obj && obj !== "null" && obj !== "undefined";
+}
+
+
 function collides(a, b) {
     if (typeof a === "undefined" || typeof b === "undefined")
         return false;
@@ -70,7 +76,8 @@ $(document).ready(function () {
             // objectList.push(new Player(context));
             objectList.push(new Enemy(context));
 
-            Player = new Player(context);
+            ThePlayer = new Player(context);
+            ThePlayer.init();
 
             for (x in objectList) {
                 if (objectList[x].init)
@@ -113,8 +120,8 @@ function update() {
     //textX +=1;
     //textY += 1;
 
-    if (Player.update)
-        Player.update();
+    if (isReal(ThePlayer) && ThePlayer.update)
+        ThePlayer.update();
 
     for (x in objectList) {
         if (objectList[x].update)
@@ -151,6 +158,7 @@ function update() {
 
     // Handle collisions
 
+    /*
     //Bombs and Player
     //
     // Check to see if there is a bomb in flight
@@ -169,6 +177,24 @@ function update() {
             }
         });
     }
+    */
+
+    //Bombs and Player
+    //
+    // Check to see if there is a bomb in flight
+    if (bombList.length > 0 && isReal(ThePlayer)) {
+        if (collides(bombList[0], ThePlayer)) {
+            bombList[0].shouldDelete = true;
+            if (ThePlayer.explode)
+                ThePlayer.explode(function () {
+                    var p = new Player();
+                    p.init();
+                    ThePlayer = p;
+                });
+        }
+
+    }
+
     bombList = bombList.filter(checkShouldDelete);
     // End bombs and Player
 
@@ -182,18 +208,26 @@ function update() {
                     // console.log('Missile collision detected!');
                     m.shouldDelete = true;
                     if (o.explode)
-                        o.explode();
+                        o.explode(function () {
+                            if (objectList.filter(checkIsEnemy).length < 1) {
+                                ENEMY_MOVE_DISTANCE += 1;
+                                // Add new enemy after the old one is done exploding
+                                var e = new Enemy();
+                                e.init();
+                                objectList.push(e);
+                            }
+                        });
                     // console.log('Run me after explosion is complete.');
 
                 }
                 // Have we blown up the last enemy? If so,
                 // add a new one.
-                if (objectList.filter(checkIsEnemy).length < 1) {
-
-                    ENEMY_MOVE_DISTANCE += 1;
-                    objectList.push(new Enemy());
-                }
-
+                //if (objectList.filter(checkIsEnemy).length < 1) {
+                //    ENEMY_MOVE_DISTANCE += 1;
+                //    var e = new Enemy();
+                //    e.init();
+                //    objectList.push(e);
+                //}
             });
         });
         missileList = missileList.filter(checkShouldDelete);
@@ -225,6 +259,10 @@ function update() {
     }
 
     objectList = objectList.filter(checkShouldDelete);
+
+    if (isReal(ThePlayer) && ThePlayer.shouldDelete)
+        ThePlayer = null;
+
     // End handling collisions
 
     for (e in explosionList) {
@@ -236,6 +274,10 @@ function update() {
 
 function draw() {
     context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    if (isReal(ThePlayer) && ThePlayer.draw)
+        ThePlayer.draw();
+
     for (x in objectList) {
         if (objectList[x].draw)
             objectList[x].draw();

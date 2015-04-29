@@ -6,7 +6,7 @@ var explosionList = null;
 
 // Only one player at a time in the game.
 // Store it in its own var.
-var Player = null;
+var ThePlayer = null;
 
 var expImg = null;
 var enemyImg = null;
