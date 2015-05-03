@@ -23,13 +23,13 @@ function isReal(obj) {
 
 
 function collides(a, b) {
-    if (typeof a === "undefined" || typeof b === "undefined")
-        return false;
-    else
+    if (isReal(a) && isReal(b))
         return a.x < b.x + b.width &&
-           a.x + a.width > b.x &&
-           a.y < b.y + b.height &&
-           a.y + a.height > b.y;
+            a.x + a.width > b.x &&
+            a.y < b.y + b.height &&
+            a.y + a.height > b.y;
+    else
+        return false;
 }
 
 function gameOver() {
@@ -54,13 +54,13 @@ function gameOver() {
 
 $(document).ready(function () {
     expImg = new Image();
-    expImg.src = "/images/explosionspritesheet.gif";
+    expImg.src = "images/explosionspritesheet.gif";
 
     enemyImg = new Image();
-    enemyImg.src = "/images/UFO.gif";
+    enemyImg.src = "images/UFO.gif";
 
     playerImg = new Image();
-    playerImg.src = "/images/tank_small.gif";
+    playerImg.src = "images/tank_small.gif";
 
 
     $("#Reset").addClass("disabled");
@@ -158,27 +158,6 @@ function update() {
 
     // Handle collisions
 
-    /*
-    //Bombs and Player
-    //
-    // Check to see if there is a bomb in flight
-    if (bombList.length > 0) {
-        objectList.forEach(function (o) {
-            if (collides(o, bombList[0])) {
-                // console.log('Bomb collision detected!');
-                bombList[0].shouldDelete = true;
-                if (objectList[0].explode)
-                    objectList[0].explode(function () {
-                        // Add new player after the old one is done exploding
-                        var p = new Player();
-                        p.init();
-                        objectList.push(p);
-                    });
-            }
-        });
-    }
-    */
-
     //Bombs and Player
     //
     // Check to see if there is a bomb in flight
@@ -235,28 +214,25 @@ function update() {
     // End missiles and Enemy
 
 
-
-    // are the Enemy and Player colliding?
-    // HACK! HACK! This will only work because:
-    // 1. Only using one enemy and
-    // 2. Storing enemy and player in the same objectlist array
-    if (collides(objectList[0], objectList[1])) {
+    // Handle collision between enemy and player
+    if (collides(objectList[0], ThePlayer)) {
         // console.log('Player/enemy collision detected!');
-        if (objectList[0].explode)
-            objectList[0].explode(function () {
+        if (ThePlayer.explode)
+            ThePlayer.explode(function () {
                 // Add new player after the old one is done exploding
                 var p = new Player();
                 p.init();
-                objectList.push(p);
+                ThePlayer = p;
             });
-        if (objectList[1].explode)
-            objectList[1].explode(function () {
+        if (objectList[0].explode)
+            objectList[0].explode(function () {
                 // Add new enemy after the old one is done exploding
                 var e = new Enemy();
                 e.init();
                 objectList.push(e);
             });
     }
+
 
     objectList = objectList.filter(checkShouldDelete);
 
