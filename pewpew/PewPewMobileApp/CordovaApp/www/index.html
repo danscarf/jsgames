@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1,
+          minimum-scale=1, width=device-width, height=device-height" />
+    <title>Pew Pew game</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- AngualrJSToDo references -->
+    <link href="css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="content" class="container-fluid" style="background-color: white;">
+        <div class="row" id="startcontainer" style="background-color: crimson; height: 100vh;">
+            <div class="row bgimg-starfield" id="startimgcontainer" style="background-color: gold; height: 90vh;">
+            </div>
+            <div class="row" id="startbtncontainer" style="background-color: orangered; height: 10vh;">
+                <!-- spacer to roughly center buttons-->
+                <div style="min-height: 2vh; width: 100%;">
+                </div>
+                <div class="col-xs-6">
+                    <button id="startbutton" class="btn btn-primary center-block">Start Game</button>
+                </div>
+                <div class="col-xs-6">
+                    <button id="aboutbutton" class="btn btn-primary center-block">About</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="gamecontainer" class="row" style="background-color: blueviolet; height: 100vh;">
+        <div class="col-xs-12">
+            <button id="resetbutton" class="btn btn-success center-block">End Game</button>
+        </div>
+    </div>
+
+    <div id="aboutcontainer" class="row about-box" style="background-color: greenyellow;">
+        <p>
+            Welcome to the Pew Pew game.
+        </p>
+        <p>
+            The object of the game is to shoot as many enemies as you can without being blown up yourself. You get three lives per play, but every time you hit an enemy the next one comes at you a bit faster so watch out!
+        </p>
+
+        <p>
+            This game is an experiment in making games using HTML5, Bootstrap and a couple of other cool things. I know it's a bit rough, but hey you don't need much to have fun, right?
+        </p>
+
+        <p>
+            Enjoy :)
+        </p>
+
+        <p>
+            <button id="returnbutton" class="btn btn-success center-block">Return</button>
+        </p>
+    </div>
+
+
+    </div>
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+
+    <script src="scripts/index.js"></script>
+</body>
+</html>
