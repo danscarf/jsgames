@@ -33,7 +33,7 @@
     </div>
     <div class="row gamecontainer" ng-show="uiState == 'game'">
         <div class="col-xs-12">
-            <button class="btn btn-success center-block" ng-click="uiState = 'splash'">End Game</button>
+            <canvas class="gamecanvas" id="Gamefield" style="border-style: solid; border-width: 1px; height: {{gameHeight}}; width: {{gameWidth}};"></canvas>
         </div>
     </div>
 
@@ -65,5 +65,10 @@
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/index.js"></script>
+    <script language="javascript" src="scripts/jquery.hotkeys-0.7.9.min.js" type="text/javascript"></script>
+    <script language="javascript" src="scripts/global.js" type="text/javascript"></script>
+    <script language="javascript" src="scripts/gamepieces.js" type="text/javascript"></script>
+    <script language="javascript" src="scripts/Common.js" type="text/javascript"></script>
+
 </body>
 </html>

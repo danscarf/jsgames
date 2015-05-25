@@ -32,14 +32,59 @@ var pewpewApp = angular.module('pewpewApp', []);
 pewpewApp.controller('PewPewCtrl', function ($scope) {
     $scope.uiState = 'splash';
 
+    $scope.gameWidth = window.innerWidth;
+    $scope.gameHeight = window.innerHeight;
+
     $scope.startGame = function () {
         $scope.uiState = 'game';
         // Start the game externally
-        StartNewGame();
+        StartNewGame($scope.gameHeight, $scope.gameWidth);
     };
 });
 
-function StartNewGame() {
+function StartNewGame(height, width) {
+
+    CANVAS_WIDTH = width;
+    CANVAS_HEIGHT = height;
+    console.log("height: " + height);
+    console.log("width: " + width);
+
+    console.log("Game started");
+    canvas = $("#Gamefield").get(0);
+    context = canvas.getContext("2d");
+
+    // Build the object list
+    objectList = [];
+    // objectList.push(new Player(context));
+    objectList.push(new Enemy(context));
+
+    ThePlayer = new Player(context);
+    ThePlayer.init();
+
+    for (x in objectList) {
+        if (objectList[x].init)
+            objectList[x].init();
+    }
+
+    // Build the missileList list
+    missileList = [];
+
+    // Build the bombList list
+    bombList = [];
+
+    // Build the explosionList list
+    explosionList = [];
+
+    // Main game loop
+    setIntervalId = setInterval(function () {
+        update();
+        draw();
+    }, 1000 / FPS);
+
+    // Disable start button
+    $("#Start").addClass("disabled");
+    // Enable reset button
+    $("#Reset").removeClass("disabled");
     // Start the game from here.
     // alert('started');
 }

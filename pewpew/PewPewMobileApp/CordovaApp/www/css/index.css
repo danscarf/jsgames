@@ -15,31 +15,37 @@
 }
 
 .bgimg-starfield {
-    /*width: 100vw;
-    height: 100vh;*/
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-image: url("../images/starfield.jpg");
-    background-size: cover;
+    width: 100vw;
+    height: 100vh;
     height: 90vh;
 }
 
 .startbtncontainer {
-    background-color: orangered;
+    /*background-color: orangered;*/
     height: 10vh;
 }
 
 .gamecontainer {
     background-color: blueviolet;
     height: 100vh;
+    width: 100vw;
 }
 
 .splash-container {
-    background-color: crimson;
+    /*background-color: crimson;*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("../images/starfield.jpg");
+    background-size: cover;
     height: 100vh;
 }
 
 .startbtnspacer {
     min-height: 2vh;
-    width: 100%;
+    width: 100vw;
+}
+
+.gamecanvas {
+    width: 100vw;
+    height: 100vh;
 }
