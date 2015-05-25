@@ -54,17 +54,14 @@ function gameOver() {
 
 $(document).ready(function () {
 
-    console.log("Loading images!");
     expImg = new Image();
-    expImg.src = "../images/explosionspritesheet.gif";
+    expImg.src = "images/explosionspritesheet.gif";
 
     enemyImg = new Image();
-    enemyImg.src = "../images/UFO.gif";
+    enemyImg.src = "images/UFO.gif";
 
     playerImg = new Image();
-    playerImg.src = "../images/tank_small.gif";
-
-    console.log("Images loaded.");
+    playerImg.src = "images/tank_small.gif";
 
     $("#Reset").addClass("disabled");
 
