@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="pewpewApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,9 +13,9 @@
     <!-- AngualrJSToDo references -->
     <link href="css/index.css" rel="stylesheet" />
 </head>
-<body>
+<body ng-controller="PewPewCtrl">
     <div id="content" class="container-fluid" style="background-color: white;">
-        <div class="row" id="startcontainer" style="background-color: crimson; height: 100vh;">
+        <div class="row" style="background-color: crimson; height: 100vh;" ng-show="showSplash==true">
             <div class="row bgimg-starfield" id="startimgcontainer" style="background-color: gold; height: 90vh;">
             </div>
             <div class="row" id="startbtncontainer" style="background-color: orangered; height: 10vh;">
@@ -23,21 +23,21 @@
                 <div style="min-height: 2vh; width: 100%;">
                 </div>
                 <div class="col-xs-6">
-                    <button id="startbutton" class="btn btn-primary center-block">Start Game</button>
+                    <button class="btn btn-primary center-block" ng-click="startGame()">Start Game</button>
                 </div>
                 <div class="col-xs-6">
-                    <button id="aboutbutton" class="btn btn-primary center-block">About</button>
+                    <button class="btn btn-primary center-block" ng-click="showAbout=true; showSplash=false;">About</button>
                 </div>
             </div>
         </div>
     </div>
-    <div id="gamecontainer" class="row" style="background-color: blueviolet; height: 100vh;">
+    <div id="gamecontainer" class="row" style="background-color: blueviolet; height: 100vh;" ng-show="runGame==true">
         <div class="col-xs-12">
-            <button id="resetbutton" class="btn btn-success center-block">End Game</button>
+            <button class="btn btn-success center-block" ng-click="runGame=false; showSplash=true;">End Game</button>
         </div>
     </div>
 
-    <div id="aboutcontainer" class="row about-box" style="background-color: greenyellow;">
+    <div class="row about-box" style="background-color: greenyellow;" ng-show="showAbout==true">
         <p>
             Welcome to the Pew Pew game.
         </p>
@@ -54,11 +54,8 @@
         </p>
 
         <p>
-            <button id="returnbutton" class="btn btn-success center-block">Return</button>
+            <button class="btn btn-success center-block" ng-click="showAbout=false; showSplash=true;">Return</button>
         </p>
-    </div>
-
-
     </div>
 
     <!-- Cordova reference, this is added to your app when it's built. -->
@@ -66,7 +63,7 @@
     <script src="scripts/platformOverrides.js"></script>
     <script src="scripts/jquery-1.11.3.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
-
+    <script src="scripts/angular.min.js"></script>
     <script src="scripts/index.js"></script>
 </body>
 </html>

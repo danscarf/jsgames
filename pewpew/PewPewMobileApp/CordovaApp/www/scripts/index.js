@@ -4,11 +4,11 @@
 // and then run "window.location.reload()" in the JavaScript Console.
 (function () {
     "use strict";
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
     function onDeviceReady() {
         // Handle the Cordova pause and resume events
-        document.addEventListener( 'pause', onPause.bind( this ), false );
+        document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
 
 
@@ -17,24 +17,6 @@
         var windowWidth = window.innerWidth;
         var windowHeight = window.innerHeight;
         var pixelRatio = window.devicePixelRatio || 1;
-        // alert(windowWidth * pixelRatio);// We know this works so comment it out.
-        $("#gamecontainer").hide();
-        $("#aboutcontainer").hide();
-
-        $("#startbutton").click(function () {
-            StartButtonClicked();
-        });
-        $("#resetbutton").click(function () {
-            ResetButtonClicked();
-        });
-        $("#aboutbutton").click(function () {
-            AboutButtonClicked();
-        });
-
-        $("#returnbutton").click(function () {
-            ReturnButtonClicked();
-        });
-
     };
 
     function onPause() {
@@ -46,24 +28,15 @@
     };
 })();
 
+var pewpewApp = angular.module('pewpewApp', []);
+pewpewApp.controller('PewPewCtrl', function ($scope) {
+    $scope.showAbout = false;
+    $scope.showSplash = true;
+    $scope.runGame = false;
 
-function StartButtonClicked() {
-    $("#startcontainer").hide();
-    $("#gamecontainer").show();
-}
-
-function ResetButtonClicked() {
-    $("#gamecontainer").hide();
-    $("#startcontainer").show();
-}
-
-function AboutButtonClicked() {
-    $("#startcontainer").hide();
-    $("#aboutcontainer").show();
-}
-
-function ReturnButtonClicked() {
-    $("#aboutcontainer").hide();
-    $("#startcontainer").show();
-
-}
+    $scope.startGame = function () {
+        $scope.showSplash = false;
+        $scope.runGame = true;
+        // Start the game externally
+    };
+});
