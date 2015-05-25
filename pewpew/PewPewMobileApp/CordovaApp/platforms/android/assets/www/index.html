@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html ng-app="pewpewApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1,
+          minimum-scale=1, width=device-width, height=device-height" />
+    <title>Pew Pew game</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- AngualrJSToDo references -->
+    <link href="css/index.css" rel="stylesheet" />
+</head>
+<body ng-controller="PewPewCtrl">
+    <div id="content" class="container-fluid">
+        <div class="row splash-container" ng-show="uiState == 'splash'">
+            <div class="row bgimg-starfield">
+            </div>
+            <div class="row startbtncontainer">
+                <!-- spacer to roughly center buttons-->
+                <div class="startbtnspacer">
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-primary center-block" ng-click="startGame()">Start Game</button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-primary center-block" ng-click="uiState = 'about'">About</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row gamecontainer" ng-show="uiState == 'game'">
+        <div class="col-xs-12">
+            <button class="btn btn-success center-block" ng-click="uiState = 'splash'">End Game</button>
+        </div>
+    </div>
+
+    <div class="row about-box" ng-show="uiState == 'about'">
+        <p>
+            Welcome to the Pew Pew game.
+        </p>
+        <p>
+            The object of the game is to shoot as many enemies as you can without being blown up yourself. You get three lives per play, but every time you hit an enemy the next one comes at you a bit faster so watch out!
+        </p>
+
+        <p>
+            This game is an experiment in making games using HTML5, Bootstrap and a couple of other cool things. I know it's a bit rough, but hey you don't need much to have fun, right?
+        </p>
+
+        <p>
+            Enjoy :)
+        </p>
+
+        <p>
+            <button class="btn btn-success center-block" ng-click="uiState = 'splash'">Return</button>
+        </p>
+    </div>
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/index.js"></script>
+</body>
+</html>

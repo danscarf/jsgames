@@ -1,0 +1,45 @@
+﻿body {
+}
+
+.about-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-45%, -50%);
+    border: 8px solid #B8CB99;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 15px;
+    background-color: greenyellow;
+}
+
+.bgimg-starfield {
+    /*width: 100vw;
+    height: 100vh;*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("../images/starfield.jpg");
+    background-size: cover;
+    height: 90vh;
+}
+
+.startbtncontainer {
+    background-color: orangered;
+    height: 10vh;
+}
+
+.gamecontainer {
+    background-color: blueviolet;
+    height: 100vh;
+}
+
+.splash-container {
+    background-color: crimson;
+    height: 100vh;
+}
+
+.startbtnspacer {
+    min-height: 2vh;
+    width: 100%;
+}

@@ -16,14 +16,20 @@ Number.prototype.clamp = function (min, max) {
 };
 
 
+
+function isReal(obj) {
+    return obj && obj !== "null" && obj !== "undefined";
+}
+
+
 function collides(a, b) {
-    if (typeof a === "undefined" || typeof b === "undefined")
-        return false;
-    else
+    if (isReal(a) && isReal(b))
         return a.x < b.x + b.width &&
-           a.x + a.width > b.x &&
-           a.y < b.y + b.height &&
-           a.y + a.height > b.y;
+            a.x + a.width > b.x &&
+            a.y < b.y + b.height &&
+            a.y + a.height > b.y;
+    else
+        return false;
 }
 
 function gameOver() {
@@ -48,13 +54,13 @@ function gameOver() {
 
 $(document).ready(function () {
     expImg = new Image();
-    expImg.src = "/images/explosionspritesheet.gif";
+    expImg.src = "images/explosionspritesheet.gif";
 
     enemyImg = new Image();
-    enemyImg.src = "/images/UFO.gif";
+    enemyImg.src = "images/UFO.gif";
 
     playerImg = new Image();
-    playerImg.src = "/images/tank_small.gif";
+    playerImg.src = "images/tank_small.gif";
 
 
     $("#Reset").addClass("disabled");
@@ -67,8 +73,11 @@ $(document).ready(function () {
 
             // Build the object list
             objectList = [];
-            objectList.push(new Player(context));
+            // objectList.push(new Player(context));
             objectList.push(new Enemy(context));
+
+            ThePlayer = new Player(context);
+            ThePlayer.init();
 
             for (x in objectList) {
                 if (objectList[x].init)
@@ -110,6 +119,10 @@ $(document).ready(function () {
 function update() {
     //textX +=1;
     //textY += 1;
+
+    if (isReal(ThePlayer) && ThePlayer.update)
+        ThePlayer.update();
+
     for (x in objectList) {
         if (objectList[x].update)
             objectList[x].update();
@@ -148,21 +161,19 @@ function update() {
     //Bombs and Player
     //
     // Check to see if there is a bomb in flight
-    if (bombList.length > 0) {
-        objectList.forEach(function (o) {
-            if (collides(o, bombList[0])) {
-                // console.log('Bomb collision detected!');
-                bombList[0].shouldDelete = true;
-                if (objectList[0].explode)
-                    objectList[0].explode(function () {
-                        // Add new player after the old one is done exploding
-                        var p = new Player();
-                        p.init();
-                        objectList.push(p);
-                    });
-            }
-        });
+    if (bombList.length > 0 && isReal(ThePlayer)) {
+        if (collides(bombList[0], ThePlayer)) {
+            bombList[0].shouldDelete = true;
+            if (ThePlayer.explode)
+                ThePlayer.explode(function () {
+                    var p = new Player();
+                    p.init();
+                    ThePlayer = p;
+                });
+        }
+
     }
+
     bombList = bombList.filter(checkShouldDelete);
     // End bombs and Player
 
@@ -176,18 +187,26 @@ function update() {
                     // console.log('Missile collision detected!');
                     m.shouldDelete = true;
                     if (o.explode)
-                        o.explode();
+                        o.explode(function () {
+                            if (objectList.filter(checkIsEnemy).length < 1) {
+                                ENEMY_MOVE_DISTANCE += 1;
+                                // Add new enemy after the old one is done exploding
+                                var e = new Enemy();
+                                e.init();
+                                objectList.push(e);
+                            }
+                        });
                     // console.log('Run me after explosion is complete.');
 
                 }
                 // Have we blown up the last enemy? If so,
                 // add a new one.
-                if (objectList.filter(checkIsEnemy).length < 1) {
-
-                    ENEMY_MOVE_DISTANCE += 1;
-                    objectList.push(new Enemy());
-                }
-
+                //if (objectList.filter(checkIsEnemy).length < 1) {
+                //    ENEMY_MOVE_DISTANCE += 1;
+                //    var e = new Enemy();
+                //    e.init();
+                //    objectList.push(e);
+                //}
             });
         });
         missileList = missileList.filter(checkShouldDelete);
@@ -195,22 +214,18 @@ function update() {
     // End missiles and Enemy
 
 
-
-    // are the Enemy and Player colliding?
-    // HACK! HACK! This will only work because:
-    // 1. Only using one enemy and
-    // 2. Storing enemy and player in the same objectlist array
-    if (collides(objectList[0], objectList[1])) {
+    // Handle collision between enemy and player
+    if (collides(objectList[0], ThePlayer)) {
         // console.log('Player/enemy collision detected!');
-        if (objectList[0].explode)
-            objectList[0].explode(function () {
+        if (ThePlayer.explode)
+            ThePlayer.explode(function () {
                 // Add new player after the old one is done exploding
                 var p = new Player();
                 p.init();
-                objectList.push(p);
+                ThePlayer = p;
             });
-        if (objectList[1].explode)
-            objectList[1].explode(function () {
+        if (objectList[0].explode)
+            objectList[0].explode(function () {
                 // Add new enemy after the old one is done exploding
                 var e = new Enemy();
                 e.init();
@@ -218,7 +233,12 @@ function update() {
             });
     }
 
+
     objectList = objectList.filter(checkShouldDelete);
+
+    if (isReal(ThePlayer) && ThePlayer.shouldDelete)
+        ThePlayer = null;
+
     // End handling collisions
 
     for (e in explosionList) {
@@ -230,6 +250,10 @@ function update() {
 
 function draw() {
     context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    if (isReal(ThePlayer) && ThePlayer.draw)
+        ThePlayer.draw();
+
     for (x in objectList) {
         if (objectList[x].draw)
             objectList[x].draw();
