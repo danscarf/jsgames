@@ -30,13 +30,16 @@
 
 var pewpewApp = angular.module('pewpewApp', []);
 pewpewApp.controller('PewPewCtrl', function ($scope) {
-    $scope.showAbout = false;
-    $scope.showSplash = true;
-    $scope.runGame = false;
+    $scope.uiState = 'splash';
 
     $scope.startGame = function () {
-        $scope.showSplash = false;
-        $scope.runGame = true;
+        $scope.uiState = 'game';
         // Start the game externally
+        StartNewGame();
     };
 });
+
+function StartNewGame() {
+    // Start the game from here.
+    // alert('started');
+}
