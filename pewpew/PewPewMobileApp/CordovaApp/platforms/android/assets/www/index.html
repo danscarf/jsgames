@@ -14,13 +14,13 @@
     <link href="css/index.css" rel="stylesheet" />
 </head>
 <body ng-controller="PewPewCtrl">
-    <div id="content" class="container-fluid" style="background-color: white;">
-        <div class="row" style="background-color: crimson; height: 100vh;" ng-show="uiState == 'splash'">
-            <div class="row bgimg-starfield" id="startimgcontainer" style="background-color: gold; height: 90vh;">
+    <div id="content" class="container-fluid">
+        <div class="row splash-container" ng-show="uiState == 'splash'">
+            <div class="row bgimg-starfield">
             </div>
-            <div class="row" id="startbtncontainer" style="background-color: orangered; height: 10vh;">
+            <div class="row startbtncontainer">
                 <!-- spacer to roughly center buttons-->
-                <div style="min-height: 2vh; width: 100%;">
+                <div class="startbtnspacer">
                 </div>
                 <div class="col-xs-6">
                     <button class="btn btn-primary center-block" ng-click="startGame()">Start Game</button>
@@ -31,13 +31,13 @@
             </div>
         </div>
     </div>
-    <div id="gamecontainer" class="row" style="background-color: blueviolet; height: 100vh;" ng-show="uiState == 'game'">
+    <div class="row gamecontainer" ng-show="uiState == 'game'">
         <div class="col-xs-12">
             <button class="btn btn-success center-block" ng-click="uiState = 'splash'">End Game</button>
         </div>
     </div>
 
-    <div class="row about-box" style="background-color: greenyellow;" ng-show="uiState == 'about'">
+    <div class="row about-box" ng-show="uiState == 'about'">
         <p>
             Welcome to the Pew Pew game.
         </p>
