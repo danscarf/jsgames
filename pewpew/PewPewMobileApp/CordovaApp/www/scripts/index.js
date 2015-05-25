@@ -21,6 +21,8 @@
 
     function onPause() {
         // TODO: This application has been suspended. Save application state here.
+        gameOver();
+        $scope.uiState = 'splash';
     };
 
     function onResume() {
