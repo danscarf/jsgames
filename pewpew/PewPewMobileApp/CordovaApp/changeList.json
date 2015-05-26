@@ -92,14 +92,20 @@
     "res\\icons\\windows\\Square44x44Logo.scale-240.png",
     "res\\screens\\android\\screen-mdpi-portrait.png",
     "config.xml",
-    "www\\scripts\\common.js"
+    "www\\scripts\\common.js",
+    "www\\scripts\\index.js~RF783590f.TMP",
+    "www\\scripts\\index.js~RF79f8434.TMP",
+    "www\\index.html~RF7a12736.TMP",
+    "www\\index.html~RF7b0d743.TMP"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
     "plugins\\android.json",
-    "www\\index.html"
+    "www\\index.html",
+    "www\\index.html~RF7b0d743.TMP",
+    "www\\css\\index.css"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

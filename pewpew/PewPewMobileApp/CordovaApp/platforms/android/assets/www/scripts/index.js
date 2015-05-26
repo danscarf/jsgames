@@ -14,8 +14,8 @@
 
 
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        var windowWidth = window.innerWidth;
-        var windowHeight = window.innerHeight;
+        //var windowWidth = window.innerWidth;
+        //var windowHeight = window.innerHeight;
         var pixelRatio = window.devicePixelRatio || 1;
     };
 

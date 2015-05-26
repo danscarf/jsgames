@@ -6,7 +6,7 @@
     <AutoRefresh>true</AutoRefresh>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
-    <DebuggerFlavor>AndroidDevice</DebuggerFlavor>
+    <DebuggerFlavor>RippleNexusS</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <DebuggerFlavor>AndroidDevice</DebuggerFlavor>
