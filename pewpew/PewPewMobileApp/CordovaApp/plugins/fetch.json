@@ -5,5 +5,17 @@
             "url": "https://github.com/MSOpenTech/cordova-plugin-test",
             "subdir": "."
         }
+    },
+    "org.apache.cordova.device-motion": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.device-motion"
+        }
+    },
+    "org.apache.cordova.device-orientation": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.device-orientation"
+        }
     }
 }

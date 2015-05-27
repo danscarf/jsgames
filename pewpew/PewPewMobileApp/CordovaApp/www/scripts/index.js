@@ -11,11 +11,7 @@
         document.addEventListener('pause', onPause.bind(this), false);
         document.addEventListener('resume', onResume.bind(this), false);
 
-
-
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
-        //var windowWidth = window.innerWidth;
-        //var windowHeight = window.innerHeight;
         var pixelRatio = window.devicePixelRatio || 1;
     };
 
@@ -48,8 +44,6 @@ function StartNewGame(height, width) {
 
     CANVAS_WIDTH = width;
     CANVAS_HEIGHT = height;
-    console.log("height: " + height);
-    console.log("width: " + width);
 
     console.log("Game started");
     canvas = $("#Gamefield").get(0);
@@ -83,10 +77,18 @@ function StartNewGame(height, width) {
         draw();
     }, 1000 / FPS);
 
-    // Disable start button
-    $("#Start").addClass("disabled");
-    // Enable reset button
-    $("#Reset").removeClass("disabled");
-    // Start the game from here.
-    // alert('started');
+    canvas.addEventListener('touchmove',
+        function (event) {
+            if (event.targetTouches.length == 1) {
+                var touch = event.targetTouches[0];
+                if (isReal(ThePlayer)) {
+                    if (touch.pageX > ThePlayer.x + PLAYER_WIDTH) {
+                        ThePlayer.x += PLAYER_MOVE_DISTANCE;
+                    }
+                    if (touch.pageX < ThePlayer.x) {
+                        ThePlayer.x -= PLAYER_MOVE_DISTANCE;
+                    }
+                }
+            }
+        }, false);
 }
