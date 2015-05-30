@@ -18,7 +18,10 @@
     function onPause() {
         // TODO: This application has been suspended. Save application state here.
         gameOver();
-        $scope.uiState = 'splash';
+        var scope = angular.element($("#wrap")).scope();
+        scope.$apply(function () {
+            scope.uiState = 'splash';
+        })
     };
 
     function onResume() {
@@ -77,18 +80,84 @@ function StartNewGame(height, width) {
         draw();
     }, 1000 / FPS);
 
+    //canvas.addEventListener('touchstart',
+    //     function (e) {
+    //         if (playerTouchMove == 0 && e.targetTouches && e.targetTouches.length == 1) {
+    //             var touch = e.targetTouches[0];
+    //             if (isReal(ThePlayer)) {
+    //                 if (touch.pageX > ThePlayer.x + PLAYER_WIDTH) {
+    //                     playerTouchMove = 1;
+    //                 }
+    //                 if (touch.pageX < ThePlayer.x) {
+    //                     playerTouchMove = -1;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //    , false);
+
+    canvas.addEventListener('touchstart',
+         function (e) {
+             if (isTouchInProgress == 0) {
+                 isTouchInProgress = 1;
+                 console.log('touchstart: isTouchInProgress = 1;');
+             }
+             if (playerTouchMove == 0 && e.targetTouches && e.targetTouches.length == 1) {
+                 var touch = e.targetTouches[0];
+                 if (isReal(ThePlayer)) {
+                     fingerX = touch.pageX;
+                     setPlayerMovement(fingerX);
+                 }
+             }
+         }
+        , false);
+
+
     canvas.addEventListener('touchmove',
-        function (event) {
-            if (event.targetTouches.length == 1) {
-                var touch = event.targetTouches[0];
-                if (isReal(ThePlayer)) {
-                    if (touch.pageX > ThePlayer.x + PLAYER_WIDTH) {
-                        ThePlayer.x += PLAYER_MOVE_DISTANCE;
-                    }
-                    if (touch.pageX < ThePlayer.x) {
-                        ThePlayer.x -= PLAYER_MOVE_DISTANCE;
-                    }
-                }
-            }
-        }, false);
+         function (e) {
+             console.log('touchmove');
+             if (isTouchInProgress == 0) {
+                 isTouchInProgress = 1;
+                 console.log('touchmove: isTouchInProgress = 1;');
+             }
+             if (playerTouchMove == 0 && e.targetTouches && e.targetTouches.length == 1) {
+                 var touch = e.targetTouches[0];
+                 if (isReal(ThePlayer)) {
+                     fingerX = touch.pageX;
+                     setPlayerMovement(fingerX);
+                 }
+             }
+         }
+        , false);
+
+
+    function setPlayerMovement(x) {
+        console.log('setPlayerMovement(x); ' + x);
+        if (x > ThePlayer.x + PLAYER_WIDTH) {
+            playerTouchMove = 1;
+            console.log('playerTouchMove = 1;');
+        }
+        if (x < ThePlayer.x) {
+            playerTouchMove = -1;
+            console.log('playerTouchMove = -1;');
+        }
+    }
+    canvas.addEventListener('touchend',
+         function (e) {
+             if (isTouchInProgress == 1) {
+                 isTouchInProgress = 0;
+                 playerTouchMove = 0;
+                 console.log('touchend: isTouchInProgress = 0;');
+             }
+         }
+        , false);
+
+    canvas.addEventListener('touchcancel',
+     function (e) {
+         if (isTouchInProgress == 1) {
+             isTouchInProgress = 0;
+             console.log('touchcancel: isTouchInProgress = 0;');
+         }
+     }
+    , false);
 }

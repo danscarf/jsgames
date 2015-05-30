@@ -22,6 +22,24 @@ var CANVAS_HEIGHT = 400;
 
 var PLAYER_MOVE_DISTANCE = 5;
 
+// Used to slow movement based on touch/drag.
+// This gets set to:
+// 1 when a RIGHT touch/drag is detected.
+// -1 when a LEFT touch/drag is detected.
+// Then it's used by ThePlayer's update method to
+// determine if it should move. Upon movement,
+// the update method retrns the value to 0, allowing
+// the touch detection code to fire again.
+var playerTouchMove = 0;
+
+
+// Used to keep general track of whether
+// a touch or slide is in progress on the game canvas.
+var isTouchInProgress = 0;
+
+var fingerX = 0;
+
+
 var PLAYER_WIDTH = 30;
 var PLAYER_HEIGHT = 20;
 
@@ -32,9 +50,6 @@ var MISSILE_COLOR = "#00FF00";// Green
 var ENEMY_WIDTH = 30;
 var ENEMY_HEIGHT = 20;
 var ENEMY_MOVE_DISTANCE = 5;
-
-
-
 
 
 var EXPLOSION_WIDTH = 30;

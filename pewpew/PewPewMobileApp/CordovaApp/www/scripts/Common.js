@@ -45,11 +45,6 @@ function gameOver() {
     bulletJustFired = false;
 
     ENEMY_MOVE_DISTANCE = 5;
-
-    // Enable start button
-    $("#Start").removeClass("disabled");
-    // disable reset button
-    $("#Reset").addClass("disabled");
 }
 
 $(document).ready(function () {

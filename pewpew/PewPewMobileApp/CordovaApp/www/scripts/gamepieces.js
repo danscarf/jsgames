@@ -121,6 +121,26 @@ Player.prototype = {
             this.x += PLAYER_MOVE_DISTANCE;
         }
 
+        if (playerTouchMove == 1) {
+            this.x += PLAYER_MOVE_DISTANCE;
+            // Do we continue to move right?
+            if (fingerX > ThePlayer.x + PLAYER_WIDTH) {
+            }
+            else {
+                playerTouchMove = 0;
+            }
+        }
+
+        if (playerTouchMove == -1) {
+            this.x -= PLAYER_MOVE_DISTANCE;
+            // Do we continue to move right?
+            if (fingerX < ThePlayer.x) {
+            }
+            else {
+                playerTouchMove = 0;
+            }
+        }
+
         this.x = this.x.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
 
         // Handle laser firing
