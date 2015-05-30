@@ -28,4 +28,5 @@
     <preference name="InAppBrowserStorageEnabled" value="False" />
     <preference name="SuppressesIncrementalRendering" value="False" />
     <preference name="Fullscreen" value="True" />
+    <preference name="DisallowOverscroll" value="true" />
 </widget>

@@ -18,14 +18,21 @@
     function onPause() {
         // TODO: This application has been suspended. Save application state here.
         gameOver();
-        var scope = angular.element($("#wrap")).scope();
+        var scope = angular.element($("body")).scope();
         scope.$apply(function () {
             scope.uiState = 'splash';
         })
+        console.log('onPause()');
     };
 
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
+        gameOver();
+        var scope = angular.element($("body")).scope();
+        scope.$apply(function () {
+            scope.uiState = 'splash';
+        })
+        console.log('onResume()');
     };
 })();
 
