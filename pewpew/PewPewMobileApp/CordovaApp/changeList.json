@@ -94,14 +94,15 @@
     "www\\scripts\\index.js~RF908fec7.TMP",
     "www\\scripts\\index.js~RF913ebd4.TMP",
     "www\\scripts\\global.js~RF91c1f33.TMP",
-    "config.xml"
+    "config.xml",
+    "www\\scripts\\common.js"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
     "plugins\\android.json",
-    "www\\scripts\\index.js"
+    "www\\scripts\\common.js"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

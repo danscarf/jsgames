@@ -39,10 +39,12 @@ var isTouchInProgress = 0;
 var fingerX = 0;
 
 
+var NUM_PLAYERS = 3;
+
 var PLAYER_WIDTH = 30;
 var PLAYER_HEIGHT = 20;
 
-var NUM_PLAYERS_REMAINING = 3;
+var numPlayersRemaining = 0;
 
 var MISSILE_COLOR = "#00FF00";// Green
 

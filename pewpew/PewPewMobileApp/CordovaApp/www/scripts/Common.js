@@ -33,7 +33,7 @@ function collides(a, b) {
 }
 
 function gameOver() {
-    console.log("Game reset");
+    console.log("Game over");
     clearInterval(setIntervalId);
     context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -65,12 +65,14 @@ $(document).ready(function () {
             console.log("Game started");
             canvas = $("#Gamefield").get(0);
             context = canvas.getContext("2d");
+            numPlayersRemaining = NUM_PLAYERS - 1;
 
             // Build the object list
             objectList = [];
             // objectList.push(new Player(context));
             objectList.push(new Enemy(context));
 
+            console.log('numPlayersRemaining ' + numPlayersRemaining);
             ThePlayer = new Player(context);
             ThePlayer.init();
 
@@ -161,9 +163,16 @@ function update() {
             bombList[0].shouldDelete = true;
             if (ThePlayer.explode)
                 ThePlayer.explode(function () {
-                    var p = new Player();
-                    p.init();
-                    ThePlayer = p;
+                    console.log('numPlayersRemaining ' + numPlayersRemaining);
+                    if (numPlayersRemaining > 0) {
+                        var p = new Player();
+                        p.init();
+                        ThePlayer = p;
+                        numPlayersRemaining--;
+                    }
+                    else {
+                        gameOver();
+                    }
                 });
         }
 
@@ -214,10 +223,19 @@ function update() {
         // console.log('Player/enemy collision detected!');
         if (ThePlayer.explode)
             ThePlayer.explode(function () {
+                console.log('numPlayersRemaining ' + numPlayersRemaining);
                 // Add new player after the old one is done exploding
-                var p = new Player();
-                p.init();
-                ThePlayer = p;
+                // if there are enough remaining players
+                if (numPlayersRemaining > 0) {
+                    var p = new Player();
+                    p.init();
+                    ThePlayer = p;
+                    numPlayersRemaining--;
+                }
+                else {
+                    gameOver();
+                }
+
             });
         if (objectList[0].explode)
             objectList[0].explode(function () {

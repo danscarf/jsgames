@@ -58,12 +58,14 @@ function StartNewGame(height, width) {
     console.log("Game started");
     canvas = $("#Gamefield").get(0);
     context = canvas.getContext("2d");
+    numPlayersRemaining = NUM_PLAYERS -1;
 
     // Build the object list
     objectList = [];
     // objectList.push(new Player(context));
     objectList.push(new Enemy(context));
 
+    console.log('numPlayersRemaining ' + numPlayersRemaining);
     ThePlayer = new Player(context);
     ThePlayer.init();
 
