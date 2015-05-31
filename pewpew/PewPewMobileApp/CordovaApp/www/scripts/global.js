@@ -32,7 +32,6 @@ var PLAYER_MOVE_DISTANCE = 5;
 // the touch detection code to fire again.
 var playerTouchMove = 0;
 
-
 // Used to keep general track of whether
 // a touch or slide is in progress on the game canvas.
 var isTouchInProgress = 0;

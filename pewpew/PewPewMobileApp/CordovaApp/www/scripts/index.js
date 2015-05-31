@@ -87,27 +87,11 @@ function StartNewGame(height, width) {
         draw();
     }, 1000 / FPS);
 
-    //canvas.addEventListener('touchstart',
-    //     function (e) {
-    //         if (playerTouchMove == 0 && e.targetTouches && e.targetTouches.length == 1) {
-    //             var touch = e.targetTouches[0];
-    //             if (isReal(ThePlayer)) {
-    //                 if (touch.pageX > ThePlayer.x + PLAYER_WIDTH) {
-    //                     playerTouchMove = 1;
-    //                 }
-    //                 if (touch.pageX < ThePlayer.x) {
-    //                     playerTouchMove = -1;
-    //                 }
-    //             }
-    //         }
-    //     }
-    //    , false);
-
     canvas.addEventListener('touchstart',
          function (e) {
              if (isTouchInProgress == 0) {
                  isTouchInProgress = 1;
-                 console.log('touchstart: isTouchInProgress = 1;');
+                 // console.log('touchstart: isTouchInProgress = 1;');
              }
              if (playerTouchMove == 0 && e.targetTouches && e.targetTouches.length == 1) {
                  var touch = e.targetTouches[0];
@@ -122,10 +106,10 @@ function StartNewGame(height, width) {
 
     canvas.addEventListener('touchmove',
          function (e) {
-             console.log('touchmove');
+             // console.log('touchmove');
              if (isTouchInProgress == 0) {
                  isTouchInProgress = 1;
-                 console.log('touchmove: isTouchInProgress = 1;');
+                 // console.log('touchmove: isTouchInProgress = 1;');
              }
              if (playerTouchMove == 0 && e.targetTouches && e.targetTouches.length == 1) {
                  var touch = e.targetTouches[0];
@@ -139,14 +123,14 @@ function StartNewGame(height, width) {
 
 
     function setPlayerMovement(x) {
-        console.log('setPlayerMovement(x); ' + x);
-        if (x > ThePlayer.x + PLAYER_WIDTH) {
+        // console.log('setPlayerMovement(x); ' + x);
+        if (x > ThePlayer.x + PLAYER_WIDTH/2) {
             playerTouchMove = 1;
-            console.log('playerTouchMove = 1;');
+            // console.log('playerTouchMove = 1;');
         }
-        if (x < ThePlayer.x) {
+        if (x < ThePlayer.x + PLAYER_WIDTH/2) {
             playerTouchMove = -1;
-            console.log('playerTouchMove = -1;');
+            // console.log('playerTouchMove = -1;');
         }
     }
     canvas.addEventListener('touchend',
@@ -154,7 +138,7 @@ function StartNewGame(height, width) {
              if (isTouchInProgress == 1) {
                  isTouchInProgress = 0;
                  playerTouchMove = 0;
-                 console.log('touchend: isTouchInProgress = 0;');
+                 // console.log('touchend: isTouchInProgress = 0;');
              }
          }
         , false);
@@ -163,7 +147,7 @@ function StartNewGame(height, width) {
      function (e) {
          if (isTouchInProgress == 1) {
              isTouchInProgress = 0;
-             console.log('touchcancel: isTouchInProgress = 0;');
+             // console.log('touchcancel: isTouchInProgress = 0;');
          }
      }
     , false);
