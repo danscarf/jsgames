@@ -107,6 +107,7 @@ function StartNewGame(height, width) {
     canvas.addEventListener('touchmove',
          function (e) {
              // console.log('touchmove');
+             e.preventDefault();
              if (isTouchInProgress == 0) {
                  isTouchInProgress = 1;
                  // console.log('touchmove: isTouchInProgress = 1;');
