@@ -35,16 +35,28 @@ function collides(a, b) {
 function gameOver() {
     console.log("Game over");
     clearInterval(setIntervalId);
-    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    for (x in objectList) {
-        if (objectList[x].reset)
-            objectList[x].reset();
+    if (isReal(context)) {
+        context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+    if (isReal(objectList)) {
+        for (x in objectList) {
+            if (objectList[x].reset)
+                objectList[x].reset();
+        }
     }
     objectList = null;
     bulletJustFired = false;
 
     ENEMY_MOVE_DISTANCE = 5;
+
+    var scope = angular.element($("body")).scope();
+    if (isReal(scope)) {
+        scope.$apply(function () {
+            scope.uiState = 'splash';
+            console.log('setting scope back to splash in game over');
+        });
+    }
 }
 
 $(document).ready(function () {

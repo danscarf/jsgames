@@ -3,6 +3,7 @@ var enemyList = null;
 var missileList = null;
 var bombList = null;
 var explosionList = null;
+var objectList = null;
 
 // Only one player at a time in the game.
 // Store it in its own var.
