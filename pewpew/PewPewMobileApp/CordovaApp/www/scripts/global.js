@@ -4,6 +4,7 @@ var missileList = null;
 var bombList = null;
 var explosionList = null;
 var objectList = null;
+var playerLivesList = null;
 
 // Only one player at a time in the game.
 // Store it in its own var.

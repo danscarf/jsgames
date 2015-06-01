@@ -102,6 +102,9 @@ $(document).ready(function () {
             // Build the explosionList list
             explosionList = [];
 
+            // Build the explosionList list
+            playerLivesList = [];
+
             // Main game loop
             setIntervalId = setInterval(function () {
                 update();

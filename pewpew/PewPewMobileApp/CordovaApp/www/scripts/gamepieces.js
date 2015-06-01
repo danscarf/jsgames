@@ -51,6 +51,8 @@ extend(Player, GamePiece);
 extend(Enemy, GamePiece);
 extend(Bomb, GamePiece);
 extend(Explosion, GamePiece);
+extend(PlayerLife, GamePiece); playerLife;
+
 
 
 function Missile(a, b) {
@@ -363,4 +365,39 @@ Explosion.prototype = {
         GamePiece.prototype.explode.apply(this, arguments);
         // console.log('Explosion explode');
     }
+};
+
+
+function PlayerLife(a, b, c) {
+    GamePiece.call(this, a);
+    this.x = b;
+    this.y = c;
+}
+
+PlayerLife.prototype = {
+    varContext: null,
+    width: PLAYER_WIDTH/2,
+    height: pLAYER_MISSILE_HEIGHT/2,
+    x: null,
+    y: null,
+
+    init: function () {
+        GamePiece.prototype.init.apply(this, arguments);
+        //this.x = 100;
+        //this.y = 200;
+    },
+    update: function () {
+        GamePiece.prototype.update.apply(this, arguments);
+    },
+    draw: function () {
+        GamePiece.prototype.draw.apply(this, arguments);
+        context.drawImage(playerImg, this.x, this.y);
+    },
+    reset: function () {
+        GamePiece.prototype.reset.apply(this, arguments);
+    },
+    explode: function () {
+        GamePiece.prototype.explode.apply(this, arguments);
+    }
+
 };

@@ -52,9 +52,11 @@ function StartNewGame(height, width) {
     context = canvas.getContext("2d");
     numPlayersRemaining = NUM_PLAYERS -1;
 
+    // Build the explosionList list
+    playerLivesList = [];
+
     // Build the object list
     objectList = [];
-    // objectList.push(new Player(context));
     objectList.push(new Enemy(context));
 
     console.log('numPlayersRemaining ' + numPlayersRemaining);
