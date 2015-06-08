@@ -51,7 +51,7 @@ extend(Player, GamePiece);
 extend(Enemy, GamePiece);
 extend(Bomb, GamePiece);
 extend(Explosion, GamePiece);
-extend(PlayerLife, GamePiece); playerLife;
+extend(PlayerLife, GamePiece);
 
 
 
@@ -391,7 +391,7 @@ PlayerLife.prototype = {
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
-        context.drawImage(playerImg, this.x, this.y);
+        context.drawImage(playerImg, this.x, this.y, this.width, this.height);
     },
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);

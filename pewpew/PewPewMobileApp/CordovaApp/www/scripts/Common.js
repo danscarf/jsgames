@@ -178,12 +178,11 @@ function update() {
             bombList[0].shouldDelete = true;
             if (ThePlayer.explode)
                 ThePlayer.explode(function () {
-                    console.log('numPlayersRemaining ' + numPlayersRemaining);
-                    if (numPlayersRemaining > 0) {
+                    if (playerLivesList.length > 0) {
                         var p = new Player();
                         p.init();
                         ThePlayer = p;
-                        numPlayersRemaining--;
+                        playerLivesList[playerLivesList.length - 1].reset();
                     }
                     else {
                         gameOver();
@@ -238,14 +237,11 @@ function update() {
         // console.log('Player/enemy collision detected!');
         if (ThePlayer.explode)
             ThePlayer.explode(function () {
-                console.log('numPlayersRemaining ' + numPlayersRemaining);
-                // Add new player after the old one is done exploding
-                // if there are enough remaining players
-                if (numPlayersRemaining > 0) {
+                if (playerLivesList.length > 0) {
                     var p = new Player();
                     p.init();
                     ThePlayer = p;
-                    numPlayersRemaining--;
+                    playerLivesList[playerLivesList.length - 1].reset();
                 }
                 else {
                     gameOver();
@@ -274,6 +270,8 @@ function update() {
             explosionList[e].update();
     }
     explosionList = explosionList.filter(checkShouldDelete);
+
+    playerLivesList = playerLivesList.filter(checkShouldDelete);
 }
 
 function draw() {
@@ -300,6 +298,11 @@ function draw() {
     for (e in explosionList) {
         if (explosionList[e].draw)
             explosionList[e].draw();
+    }
+
+    for (p in playerLivesList) {
+        if (playerLivesList[p].draw)
+            playerLivesList[p].draw();
     }
 
 }

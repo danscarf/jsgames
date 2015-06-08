@@ -50,16 +50,25 @@ function StartNewGame(height, width) {
     console.log("Game started");
     canvas = $("#Gamefield").get(0);
     context = canvas.getContext("2d");
-    numPlayersRemaining = NUM_PLAYERS -1;
 
-    // Build the explosionList list
+    // Build the playerLives list
     playerLivesList = [];
+    for (var x = 0; x < NUM_PLAYERS -1; x++) {
+        var pl = new PlayerLife(context);
+        pl.x = 30 + playerLivesList.length * 50;
+        pl.y = CANVAS_HEIGHT - (2 * PLAYER_HEIGHT);
+        if (pl.init)
+            pl.init();
+        playerLivesList.push(pl);
+    }
+    numPlayersRemaining = NUM_PLAYERS - 1;
+
 
     // Build the object list
     objectList = [];
     objectList.push(new Enemy(context));
 
-    console.log('numPlayersRemaining ' + numPlayersRemaining);
+    // console.log('numPlayersRemaining ' + numPlayersRemaining);
     ThePlayer = new Player(context);
     ThePlayer.init();
 
@@ -121,11 +130,11 @@ function StartNewGame(height, width) {
 
     function setPlayerMovement(x) {
         // console.log('setPlayerMovement(x); ' + x);
-        if (x > ThePlayer.x + PLAYER_WIDTH/2) {
+        if (x > ThePlayer.x + PLAYER_WIDTH / 2) {
             playerTouchMove = 1;
             // console.log('playerTouchMove = 1;');
         }
-        if (x < ThePlayer.x + PLAYER_WIDTH/2) {
+        if (x < ThePlayer.x + PLAYER_WIDTH / 2) {
             playerTouchMove = -1;
             // console.log('playerTouchMove = -1;');
         }
