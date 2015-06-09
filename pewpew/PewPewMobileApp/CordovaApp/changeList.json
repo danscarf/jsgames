@@ -101,8 +101,7 @@
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
-    "plugins\\android.json",
-    "www\\scripts\\gamepieces.js"
+    "plugins\\android.json"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

@@ -6,6 +6,10 @@ var explosionList = null;
 var objectList = null;
 var playerLivesList = null;
 
+
+var score = 0;
+var scoreIncrement = 50;
+
 // Only one player at a time in the game.
 // Store it in its own var.
 var ThePlayer = null;

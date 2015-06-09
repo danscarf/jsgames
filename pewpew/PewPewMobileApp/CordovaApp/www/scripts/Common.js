@@ -50,6 +50,10 @@ function gameOver() {
 
     ENEMY_MOVE_DISTANCE = 5;
 
+    playerLivesList = null;
+
+    score = 0;
+
     var scope = angular.element($("body")).scope();
     if (isReal(scope)) {
         scope.$apply(function () {
@@ -208,6 +212,7 @@ function update() {
                         o.explode(function () {
                             if (objectList.filter(checkIsEnemy).length < 1) {
                                 ENEMY_MOVE_DISTANCE += 1;
+                                score += scoreIncrement;
                                 // Add new enemy after the old one is done exploding
                                 var e = new Enemy();
                                 e.init();
@@ -217,14 +222,6 @@ function update() {
                     // console.log('Run me after explosion is complete.');
 
                 }
-                // Have we blown up the last enemy? If so,
-                // add a new one.
-                //if (objectList.filter(checkIsEnemy).length < 1) {
-                //    ENEMY_MOVE_DISTANCE += 1;
-                //    var e = new Enemy();
-                //    e.init();
-                //    objectList.push(e);
-                //}
             });
         });
         missileList = missileList.filter(checkShouldDelete);
@@ -271,7 +268,9 @@ function update() {
     }
     explosionList = explosionList.filter(checkShouldDelete);
 
-    playerLivesList = playerLivesList.filter(checkShouldDelete);
+    if (isReal(playerLivesList)) {
+        playerLivesList = playerLivesList.filter(checkShouldDelete);
+    }
 }
 
 function draw() {
@@ -304,6 +303,8 @@ function draw() {
         if (playerLivesList[p].draw)
             playerLivesList[p].draw();
     }
+
+    context.fillText(score, CANVAS_WIDTH * .8 , CANVAS_HEIGHT * .055);
 
 }
 
