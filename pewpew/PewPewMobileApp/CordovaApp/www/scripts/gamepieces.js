@@ -377,14 +377,12 @@ function PlayerLife(a, b, c) {
 PlayerLife.prototype = {
     varContext: null,
     width: PLAYER_WIDTH/2,
-    height: pLAYER_MISSILE_HEIGHT/2,
+    height: PLAYER_HEIGHT/2,
     x: null,
     y: null,
 
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
-        //this.x = 100;
-        //this.y = 200;
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);

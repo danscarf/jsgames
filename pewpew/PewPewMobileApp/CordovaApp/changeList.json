@@ -102,8 +102,7 @@
   "deletedPluginsIos": [],
   "changedFiles": [
     "plugins\\android.json",
-    "www\\scripts\\index.js",
-    "www\\scripts\\common.js"
+    "www\\scripts\\index.js"
   ],
   "deletedFiles": [],
   "addedPlugins": [],

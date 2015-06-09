@@ -56,7 +56,7 @@ function StartNewGame(height, width) {
     for (var x = 0; x < NUM_PLAYERS -1; x++) {
         var pl = new PlayerLife(context);
         pl.x = 30 + playerLivesList.length * 50;
-        pl.y = CANVAS_HEIGHT - (2 * PLAYER_HEIGHT);
+        pl.y = CANVAS_HEIGHT * .04;
         if (pl.init)
             pl.init();
         playerLivesList.push(pl);
