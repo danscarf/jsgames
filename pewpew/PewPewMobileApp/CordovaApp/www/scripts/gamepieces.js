@@ -3,7 +3,7 @@
 }
 
 function checkShouldDelete(value) {
-    return ! value.shouldDelete;
+    return !value.shouldDelete;
 }
 
 function checkIsPlayer(value) {
@@ -33,10 +33,10 @@ GamePiece.prototype = {
     { },
     draw: function ()
     { },
-    reset: function() {
+    reset: function () {
         this.shouldDelete = true;
     },
-    explode: function(callback) {
+    explode: function (callback) {
         var explosion = new Explosion(this.varContext, this.x, this.y, callback);
         explosionList.push(explosion);
         this.shouldDelete = true;
@@ -237,6 +237,13 @@ Enemy.prototype = {
             }
         }
         // End bomb dropping logic.
+
+        // If enemy has run past the end of the canvas,
+        // reset it's Y value to the top of the screen.
+        if (this.y > CANVAS_HEIGHT) {
+            this.y = 10;
+        }
+
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
@@ -347,13 +354,13 @@ Explosion.prototype = {
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
 
-        context.drawImage(expImg, this.spriteIndex, 0, this.spriteWidth, 100, this.x, this.y -25, this.width + 50, this.height + 50);
+        context.drawImage(expImg, this.spriteIndex, 0, this.spriteWidth, 100, this.x, this.y - 25, this.width + 50, this.height + 50);
         // console.log('Explosion draw');
     },
     reset: function () {
         GamePiece.prototype.reset.apply(this, arguments);
         this.shouldDelete = true;
-        
+
         // Call callback here.
         if (typeof (this.callback) == "function") {
             // this.callback(this.x, this.y);
@@ -376,8 +383,8 @@ function PlayerLife(a, b, c) {
 
 PlayerLife.prototype = {
     varContext: null,
-    width: PLAYER_WIDTH/2,
-    height: PLAYER_HEIGHT/2,
+    width: PLAYER_WIDTH / 2,
+    height: PLAYER_HEIGHT / 2,
     x: null,
     y: null,
 
