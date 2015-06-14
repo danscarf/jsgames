@@ -289,7 +289,6 @@ function update() {
             // Finally, set up for the next bomb.
             starDropTime = randomDropTime(125, 375);
         }
-
     }
 
     for (s in starList) {
@@ -300,6 +299,24 @@ function update() {
         starList = starList.filter(checkShouldDelete);
     }
     // End handling stars
+
+    // Handle auto-fire missiles
+    if (isReal(missileList) && missileList.length < MAX_MISSILES) {
+        var current = Date.now();
+        if (current >= missileAutofireTime && isReal(ThePlayer)) {
+            // console.log('Time to auto-fire another missile');
+
+            var missile = new Missile(context);
+            missile.x = ThePlayer.x;
+            if (missile.init)
+                missile.init();
+            missileList.push(missile);
+            bulletJustFired = true;
+
+            missileAutofireTime = current + MISSILE_AUTOFIRE_INTERVAL;
+        }
+    }
+    // End handling auto-fire missiles
 }
 
 function draw() {

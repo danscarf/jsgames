@@ -23,6 +23,10 @@ var context;
 var canvas;
 var FPS = 30;
 var setIntervalId;
+
+// Overridden when running on a device.
+// These initial values are only used when
+// running in a web browser.
 var CANVAS_WIDTH = 600;
 var CANVAS_HEIGHT = 400;
 
@@ -89,3 +93,6 @@ var STAR_WIDTH = 3;
 var STAR_HEIGHT = 2;
 var STAR_MOVE_DISTANCE = 5;
 var starDropTime = 0;
+
+var missileAutofireTime = 0;
+var MISSILE_AUTOFIRE_INTERVAL = 750;

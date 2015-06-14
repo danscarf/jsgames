@@ -148,7 +148,7 @@ Player.prototype = {
 
         this.x = this.x.clamp(0, CANVAS_WIDTH - PLAYER_WIDTH);
 
-        // Handle laser firing
+        // Handle missile firing
         // Need to ensure only one laser fire per space key. Otherwise
         // you'd get a continuous stream of lasers when you hold the space down.
         if (keydown.space && bulletJustFired == false) {
@@ -235,7 +235,7 @@ Enemy.prototype = {
                     b.init();
                 // b.x = this.x;
                 bombList.push(b);
-                // Finally, set up for the next bomb.
+                // Finally, set us up next bomb.
                 this.bombDropTime = randomDropTime(250, 750);
             }
         }
@@ -246,7 +246,6 @@ Enemy.prototype = {
         if (this.y > CANVAS_HEIGHT) {
             this.y = 10;
         }
-
     },
     draw: function () {
         GamePiece.prototype.draw.apply(this, arguments);
