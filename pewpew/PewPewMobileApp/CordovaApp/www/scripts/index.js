@@ -86,6 +86,13 @@ function StartNewGame(height, width) {
     // Build the explosionList list
     explosionList = [];
 
+
+    // Build the explosionList list
+    starList = [];
+
+
+
+
     // Main game loop
     setIntervalId = setInterval(function () {
         update();

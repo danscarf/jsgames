@@ -14,9 +14,12 @@ function checkIsEnemy(value) {
     return value instanceof Enemy;
 }
 
+function rndBetweenTwoNumbers(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 function randomDropTime(min, max) {
-    var interval = Math.floor(Math.random() * (max - min + 1) + min);
+    var interval = rndBetweenTwoNumbers(min, max);
     return Date.now() + interval;
 }
 
@@ -274,7 +277,6 @@ Bomb.prototype = {
     color: BOMB_COLOR,
     width: BOMB_WIDTH,
     height: BOMB_HEIGHT,
-    direction: 1,
 
     init: function () {
         GamePiece.prototype.init.apply(this, arguments);
@@ -406,3 +408,45 @@ PlayerLife.prototype = {
     }
 
 };
+
+
+function Star(a, b, c) {
+    GamePiece.call(this, a);
+    this.x = b;
+    this.y = c;;
+}
+
+Star.prototype = {
+    varContext: null,
+    y: null,
+    x: null,
+    color: STAR_COLOR,
+    width: STAR_WIDTH,
+    height: STAR_HEIGHT,
+
+    init: function () {
+        GamePiece.prototype.init.apply(this, arguments);
+        // X position of Star gamepiece
+        this.x += (ENEMY_WIDTH / 2);
+        // console.log('Star init');
+    },
+    update: function () {
+        GamePiece.prototype.update.apply(this, arguments);
+        this.y += STAR_MOVE_DISTANCE;
+        if (this.y > CANVAS_HEIGHT) {
+            this.reset();
+        }
+    },
+    draw: function () {
+        GamePiece.prototype.draw.apply(this, arguments);
+        context.fillStyle = this.color;
+        context.fillRect(this.x, this.y, this.width, this.height);
+        // console.log('Star draw');
+    },
+    reset: function () {
+        GamePiece.prototype.reset.apply(this, arguments);
+        this.shouldDelete = true;
+        // console.log('Star reset');
+    },
+};
+

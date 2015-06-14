@@ -52,6 +52,8 @@ function gameOver() {
 
     playerLivesList = null;
 
+    starList = null;
+
     score = 0;
 
     var scope = angular.element($("body")).scope();
@@ -271,6 +273,33 @@ function update() {
     if (isReal(playerLivesList)) {
         playerLivesList = playerLivesList.filter(checkShouldDelete);
     }
+
+    // Handle stars
+    if (isReal(starList) && starList.length < MAX_STARS) {
+        // Determine if it's time to drop...
+        var current = Date.now();
+        if (current >= starDropTime) {
+            // console.log('Time to drop a star');
+
+            var s = new Star(context, rndBetweenTwoNumbers(0, CANVAS_WIDTH), 0);
+            if (s.init)
+                s.init();
+            // b.x = this.x;
+            starList.push(s);
+            // Finally, set up for the next bomb.
+            starDropTime = randomDropTime(125, 375);
+        }
+
+    }
+
+    for (s in starList) {
+        if (starList[s].update)
+            starList[s].update();
+    }
+    if (isReal(starList)) {
+        starList = starList.filter(checkShouldDelete);
+    }
+    // End handling stars
 }
 
 function draw() {
@@ -304,7 +333,13 @@ function draw() {
             playerLivesList[p].draw();
     }
 
-    context.fillText(score, CANVAS_WIDTH * .8 , CANVAS_HEIGHT * .055);
+    for (s in starList) {
+        if (starList[s].draw)
+            starList[s].draw();
+    }
+
+
+    context.fillText(score, CANVAS_WIDTH * .8, CANVAS_HEIGHT * .055);
 
 }
 

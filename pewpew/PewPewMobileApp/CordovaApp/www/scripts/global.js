@@ -5,7 +5,7 @@ var bombList = null;
 var explosionList = null;
 var objectList = null;
 var playerLivesList = null;
-
+var starList = null;
 
 var score = 0;
 var scoreIncrement = 50;
@@ -76,8 +76,16 @@ var textY = 50;
 
 var bulletJustFired = false;
 
-var BOMB_COLOR = "#FFFFFF";
+var BOMB_COLOR = "#0066FF";
 var BOMB_WIDTH = 2;
 var BOMB_HEIGHT = 6;
 var MAX_BOMBS = 10;
 var BOMB_MOVE_DISTANCE = 14;
+
+
+var STAR_COLOR = "#FFFFFF";
+var MAX_STARS = 50;
+var STAR_WIDTH = 3;
+var STAR_HEIGHT = 2;
+var STAR_MOVE_DISTANCE = 5;
+var starDropTime = 0;

@@ -36,6 +36,7 @@
     "www\\fonts\\glyphicons-halflings-regular.eot",
     "res\\icons\\ios\\icon-60-3x.png",
     "plugins\\fetch.json",
+    "config.xml",
     "res\\screens\\wp8\\SplashScreenImage.jpg",
     "res\\screens\\ios\\screen-ipad-landscape-2x.png",
     "www\\css\\bootstrap-theme.css.map",
@@ -91,17 +92,14 @@
     "res\\screens\\android\\screen-xhdpi-landscape.png",
     "res\\icons\\windows\\Square44x44Logo.scale-240.png",
     "res\\screens\\android\\screen-mdpi-portrait.png",
-    "www\\scripts\\index.js~RF908fec7.TMP",
-    "www\\scripts\\index.js~RF913ebd4.TMP",
-    "www\\scripts\\global.js~RF91c1f33.TMP",
-    "config.xml",
     "www\\scripts\\common.js"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
-    "plugins\\android.json"
+    "plugins\\android.json",
+    "www\\css\\index.css"
   ],
   "deletedFiles": [],
   "addedPlugins": [],
