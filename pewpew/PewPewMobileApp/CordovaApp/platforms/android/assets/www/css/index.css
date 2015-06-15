@@ -6,12 +6,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-45%, -50%);
-    border: 8px solid #B8CB99;
+    border: 8px solid #808080;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     padding: 15px;
-    background-color: greenyellow;
+    /*background-color: greenyellow;*/
+    color: white;
 }
 
 .bgimg-starfield {

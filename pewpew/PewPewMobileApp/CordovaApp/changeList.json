@@ -92,7 +92,9 @@
     "res\\screens\\android\\screen-xhdpi-landscape.png",
     "res\\icons\\windows\\Square44x44Logo.scale-240.png",
     "res\\screens\\android\\screen-mdpi-portrait.png",
-    "www\\scripts\\common.js"
+    "www\\scripts\\common.js",
+    "www\\images\\hubble.jpg",
+    "www\\css\\index.css~RFfba5cc1.TMP"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
