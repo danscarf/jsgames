@@ -51,6 +51,20 @@ function StartNewGame(height, width) {
     canvas = $("#Gamefield").get(0);
     context = canvas.getContext("2d");
 
+    // Set font size based on width
+    if (width >= 320 && width < 480) {
+        context.font = "20px Arial";
+    }
+    else if (width >= 480 && width < 720) {
+        context.font = "30px Arial";
+    }
+    else if (width >=720) {
+        context.font = "40px Arial";
+    }
+
+    // End setting font size
+
+
     // Build the playerLives list
     playerLivesList = [];
     for (var x = 0; x < NUM_PLAYERS -1; x++) {

@@ -48,6 +48,7 @@
     "res\\icons\\windows\\Wide310x150Logo.scale-100.png",
     "res\\icons\\ios\\icon-72-2x.png",
     "res\\icons\\ios\\icon-76-2x.png",
+    "www\\images\\hubble.jpg",
     "res\\icons\\ios\\icon-small.png",
     "www\\fonts\\glyphicons-halflings-regular.ttf",
     "res\\icons\\windows\\Square30x30Logo.scale-100.png",
@@ -91,10 +92,7 @@
     "www\\images\\tank_small.gif",
     "res\\screens\\android\\screen-xhdpi-landscape.png",
     "res\\icons\\windows\\Square44x44Logo.scale-240.png",
-    "res\\screens\\android\\screen-mdpi-portrait.png",
-    "www\\scripts\\common.js",
-    "www\\images\\hubble.jpg",
-    "www\\css\\index.css~RFfba5cc1.TMP"
+    "res\\screens\\android\\screen-mdpi-portrait.png"
   ],
   "deletedFilesIos": [],
   "addedPluginsIos": [],
