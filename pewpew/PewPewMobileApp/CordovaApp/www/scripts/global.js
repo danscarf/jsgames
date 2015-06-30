@@ -68,8 +68,8 @@ var EXPLOSION_HEIGHT = 20;
 
 
 
-var PLAYER_MISSILE_WIDTH = 2;
-var pLAYER_MISSILE_HEIGHT =6;
+var PLAYER_MISSILE_WIDTH = 5;
+var pLAYER_MISSILE_HEIGHT =7;
 var MAX_MISSILES = 3;
 var MISSILE_MOVE_DISTANCE = 7;
 
@@ -81,8 +81,8 @@ var textY = 50;
 var bulletJustFired = false;
 
 var BOMB_COLOR = "#0066FF";
-var BOMB_WIDTH = 2;
-var BOMB_HEIGHT = 6;
+var BOMB_WIDTH = 5;
+var BOMB_HEIGHT = 7;
 var MAX_BOMBS = 10;
 var BOMB_MOVE_DISTANCE = 14;
 

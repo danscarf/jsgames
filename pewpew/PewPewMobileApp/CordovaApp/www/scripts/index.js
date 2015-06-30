@@ -13,6 +13,13 @@
 
         // TODO: Cordova has been loaded. Perform any initialization that requires Cordova here.
         var pixelRatio = window.devicePixelRatio || 1;
+
+
+        // Sound Initialization
+        initSound('bomb', 'sounds/bomb.mp3');
+        initSound('explosion', 'sounds/explosion.mp3');
+        initSound('laser', 'sounds/laser.mp3');
+        // End Sound Initialization
     };
 
     function onPause() {
@@ -58,16 +65,14 @@ function StartNewGame(height, width) {
     else if (width >= 480 && width < 720) {
         context.font = "30px Arial";
     }
-    else if (width >=720) {
+    else if (width >= 720) {
         context.font = "40px Arial";
     }
-
     // End setting font size
-
 
     // Build the playerLives list
     playerLivesList = [];
-    for (var x = 0; x < NUM_PLAYERS -1; x++) {
+    for (var x = 0; x < NUM_PLAYERS - 1; x++) {
         var pl = new PlayerLife(context);
         pl.x = 30 + playerLivesList.length * 50;
         pl.y = CANVAS_HEIGHT * .04;

@@ -212,7 +212,7 @@ function update() {
                     m.shouldDelete = true;
                     if (o.explode)
                         o.explode(function () {
-                            if (objectList.filter(checkIsEnemy).length < 1) {
+                            if (isReal(objectList) && objectList.filter(checkIsEnemy).length < 1) {
                                 ENEMY_MOVE_DISTANCE += 1;
                                 score += scoreIncrement;
                                 // Add new enemy after the old one is done exploding
@@ -375,3 +375,45 @@ $(function () {
         keydown[keyName(event)] = false;
     });
 });
+
+
+// Sound stuff
+function initSound(id, path) {
+    if (isMobile() && window.plugins && window.plugins.NativeAudio) {
+
+        window.plugins.NativeAudio.preloadSimple(id, path,
+        function (msg) {
+            console.log('preloadSimple success: ' + msg);
+        },
+        function (msg) {
+            console.log('preloadSimple error: ' + msg);
+        });
+    }
+}
+
+function playSound(id) {
+    if (isMobile() && window.plugins && window.plugins.NativeAudio) {
+        // Play
+        window.plugins.NativeAudio.play(id);
+    }
+}
+
+// Unload Sounds
+function unloadSound(id) {
+    if ( isMobile() && window.plugins && window.plugins.NativeAudio) {
+        // Unload
+        window.plugins.NativeAudio.unload(id);
+    }
+}
+// End Unload Sounds
+
+//check if the application is running on a mobile device or desktop by checking userAgent types
+function isMobile() {
+    return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
+
+    //if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+    //    app.deviceType = 'mobile';
+    //} else {
+    //    app.deviceType = 'browser';
+    //}
+}
