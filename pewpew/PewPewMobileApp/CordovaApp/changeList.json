@@ -118,7 +118,8 @@
     "www\\sounds\\bomb.mp3",
     "www\\sounds\\laser.mp3",
     "www\\sounds\\explosion.mp3",
-    "www\\scripts\\gamepieces.js~RFc62e92.TMP"
+    "www\\scripts\\gamepieces.js~RFc62e92.TMP",
+    "www\\scripts\\global.js~RF54c87d0.TMP"
   ],
   "deletedFilesIos": [
     "www\\sound\\explosion.mp3",
@@ -131,6 +132,7 @@
   "deletedPluginsIos": [],
   "changedFiles": [
     "plugins\\android.json",
+    "www\\scripts\\Common.js",
     "www\\scripts\\gamepieces.js"
   ],
   "deletedFiles": [],

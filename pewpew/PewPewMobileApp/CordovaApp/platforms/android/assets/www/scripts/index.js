@@ -109,7 +109,8 @@ function StartNewGame(height, width) {
     // Build the explosionList list
     starList = [];
 
-
+    // object to keep track of currently playing sounds
+    currentSounds = {};
 
 
     // Main game loop

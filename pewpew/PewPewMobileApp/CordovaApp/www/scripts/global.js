@@ -7,6 +7,8 @@ var objectList = null;
 var playerLivesList = null;
 var starList = null;
 
+var currentSounds = null;
+
 var score = 0;
 var scoreIncrement = 50;
 

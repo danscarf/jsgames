@@ -63,6 +63,8 @@ function gameOver() {
             console.log('setting scope back to splash in game over');
         });
     }
+
+    currentSounds = null;
 }
 
 $(document).ready(function () {
@@ -393,14 +395,29 @@ function initSound(id, path) {
 
 function playSound(id) {
     if (isMobile() && window.plugins && window.plugins.NativeAudio) {
-        // Play
-        window.plugins.NativeAudio.play(id);
+
+        if (isReal(currentSounds) && currentSounds[id] != 1) {
+            currentSounds[id] = 1;
+            window.plugins.NativeAudio.play(id,
+                function success() {
+                    // console.log('success: ' + id);
+                },
+                function error() {
+                    // console.log('error: ' + id);
+                },
+                function complete() {
+                    if (isReal(currentSounds) && isReal(id) && isReal(currentSounds[id])){
+                        currentSounds[id] = 0;
+                    }
+                    // console.log('complete: ' + id);
+                });
+        }
     }
 }
 
 // Unload Sounds
 function unloadSound(id) {
-    if ( isMobile() && window.plugins && window.plugins.NativeAudio) {
+    if (isMobile() && window.plugins && window.plugins.NativeAudio) {
         // Unload
         window.plugins.NativeAudio.unload(id);
     }

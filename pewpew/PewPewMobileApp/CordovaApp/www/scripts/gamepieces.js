@@ -74,7 +74,7 @@ Missile.prototype = {
         GamePiece.prototype.init.apply(this, arguments);
         this.x += (PLAYER_WIDTH / 2);
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
-        // playSound('laser');
+        playSound('laser');
         // console.log('Missile init');
     },
     update: function () {
@@ -282,7 +282,7 @@ Bomb.prototype = {
         GamePiece.prototype.init.apply(this, arguments);
         // X position of Bomb gamepiece
         this.x += (ENEMY_WIDTH / 2);
-        // playSound('bomb');
+        playSound('bomb');
         // console.log('Bomb init');
     },
     update: function () {
