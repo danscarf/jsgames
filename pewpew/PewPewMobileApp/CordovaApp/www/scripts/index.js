@@ -19,6 +19,7 @@
         initSound('bomb', 'sounds/bomb.mp3');
         initSound('explosion', 'sounds/explosion.mp3');
         initSound('laser', 'sounds/laser.mp3');
+        initSound('spawn', 'sounds/spawn.mp3');
         // End Sound Initialization
     };
 

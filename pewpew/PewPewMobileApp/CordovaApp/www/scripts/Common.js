@@ -56,15 +56,22 @@ function gameOver() {
 
     score = 0;
 
+    currentSounds = null;
+
     var scope = angular.element($("body")).scope();
     if (isReal(scope)) {
         scope.$apply(function () {
-            scope.uiState = 'splash';
-            console.log('setting scope back to splash in game over');
+            scope.uiState = 'gameover';
         });
     }
 
-    currentSounds = null;
+    setTimeout(function () {
+        if (isReal(scope)) {
+            scope.$apply(function () {
+                scope.uiState = 'splash';
+            });
+        }
+    }, 2000);
 }
 
 $(document).ready(function () {

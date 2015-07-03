@@ -116,6 +116,7 @@ Player.prototype = {
         this.x = (CANVAS_WIDTH - PLAYER_WIDTH) / 2;
         this.y = CANVAS_HEIGHT - PLAYER_HEIGHT;
         // console.log('Player init');
+        playSound('spawn');
     },
     update: function () {
         GamePiece.prototype.update.apply(this, arguments);
@@ -208,6 +209,7 @@ Enemy.prototype = {
         this.y = 10;
 
         this.bombDropTime = randomDropTime(500, 1500);
+        playSound('spawn');
         // console.log('Enemy init');
     },
     update: function () {

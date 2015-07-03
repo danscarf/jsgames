@@ -119,7 +119,9 @@
     "www\\sounds\\laser.mp3",
     "www\\sounds\\explosion.mp3",
     "www\\scripts\\gamepieces.js~RFc62e92.TMP",
-    "www\\scripts\\global.js~RF54c87d0.TMP"
+    "www\\scripts\\global.js~RF54c87d0.TMP",
+    "www\\scripts\\Common.js~RFae66ca0.TMP",
+    "www\\sounds\\spawn.mp3"
   ],
   "deletedFilesIos": [
     "www\\sound\\explosion.mp3",
@@ -132,7 +134,9 @@
   "deletedPluginsIos": [],
   "changedFiles": [
     "plugins\\android.json",
-    "www\\scripts\\Common.js",
+    "www\\scripts\\global.js",
+    "www\\sounds\\spawn.mp3",
+    "www\\scripts\\index.js",
     "www\\scripts\\gamepieces.js"
   ],
   "deletedFiles": [],
