@@ -56,7 +56,12 @@
 }
 
 .gameovercontainer {
-    background-color: greenyellow;
+    /*background-color: greenyellow;*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("../images/gameover.jpg");
+    background-size: cover;
+
     height: 100vh;
     width: 100vw;
 }

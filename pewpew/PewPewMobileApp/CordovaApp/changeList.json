@@ -47,7 +47,6 @@
     "www\\fonts\\glyphicons-halflings-regular.eot",
     "res\\icons\\ios\\icon-60-3x.png",
     "plugins\\fetch.json",
-    "config.xml",
     "res\\screens\\wp8\\SplashScreenImage.jpg",
     "res\\screens\\ios\\screen-ipad-landscape-2x.png",
     "www\\css\\bootstrap-theme.css.map",
@@ -121,7 +120,9 @@
     "www\\scripts\\gamepieces.js~RFc62e92.TMP",
     "www\\scripts\\global.js~RF54c87d0.TMP",
     "www\\scripts\\Common.js~RFae66ca0.TMP",
-    "www\\sounds\\spawn.mp3"
+    "www\\sounds\\spawn.mp3",
+    "config.xml",
+    "www\\images\\gameover.jpg"
   ],
   "deletedFilesIos": [
     "www\\sound\\explosion.mp3",
@@ -134,10 +135,10 @@
   "deletedPluginsIos": [],
   "changedFiles": [
     "plugins\\android.json",
-    "www\\scripts\\global.js",
-    "www\\sounds\\spawn.mp3",
-    "www\\scripts\\index.js",
-    "www\\scripts\\gamepieces.js"
+    "config.xml",
+    "www\\scripts\\Common.js",
+    "www\\images\\gameover.jpg",
+    "www\\css\\index.css"
   ],
   "deletedFiles": [],
   "addedPlugins": [],
