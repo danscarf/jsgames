@@ -32,7 +32,7 @@ function collides(a, b) {
         return false;
 }
 
-function gameOver() {
+function gameOver(skipGameOver) {
     console.log("Game over");
     clearInterval(setIntervalId);
 
@@ -57,21 +57,30 @@ function gameOver() {
     score = 0;
 
     currentSounds = null;
-
     var scope = angular.element($("body")).scope();
-    if (isReal(scope)) {
-        scope.$apply(function () {
-            scope.uiState = 'gameover';
-        });
-    }
-
-    setTimeout(function () {
+    if (isReal(skipGameOver) && skipGameOver == true) {
         if (isReal(scope)) {
             scope.$apply(function () {
                 scope.uiState = 'splash';
             });
         }
-    }, 2000);
+    }
+    else {
+        if (isReal(scope)) {
+            scope.$apply(function () {
+                scope.uiState = 'gameover';
+            });
+        }
+
+        setTimeout(function () {
+            if (isReal(scope)) {
+                scope.$apply(function () {
+                    scope.uiState = 'splash';
+                });
+            }
+        }, 2000);
+    }
+
 }
 
 $(document).ready(function () {
@@ -413,7 +422,7 @@ function playSound(id) {
                     // console.log('error: ' + id);
                 },
                 function complete() {
-                    if (isReal(currentSounds) && isReal(id) && isReal(currentSounds[id])){
+                    if (isReal(currentSounds) && isReal(id) && isReal(currentSounds[id])) {
                         currentSounds[id] = 0;
                     }
                     // console.log('complete: ' + id);

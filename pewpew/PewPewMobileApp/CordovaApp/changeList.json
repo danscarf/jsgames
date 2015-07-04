@@ -122,7 +122,8 @@
     "www\\scripts\\Common.js~RFae66ca0.TMP",
     "www\\sounds\\spawn.mp3",
     "config.xml",
-    "www\\images\\gameover.jpg"
+    "www\\images\\gameover.jpg",
+    "www\\css\\index.css~RF184b76f3.TMP"
   ],
   "deletedFilesIos": [
     "www\\sound\\explosion.mp3",
@@ -134,11 +135,7 @@
   "addedPluginsIos": [],
   "deletedPluginsIos": [],
   "changedFiles": [
-    "plugins\\android.json",
-    "config.xml",
-    "www\\scripts\\Common.js",
-    "www\\images\\gameover.jpg",
-    "www\\css\\index.css"
+    "plugins\\android.json"
   ],
   "deletedFiles": [],
   "addedPlugins": [],
