@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
-<html ng-app="pewpewApp">
+<html id="wrap" ng-app="pewpewApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1,
-          minimum-scale=1, width=device-width, height=device-height" />
+          minimum-scale=1, width=device-width, height=device-height" target-densitydpi="device-dpi" />
     <title>Pew Pew game</title>
 
     <!-- Bootstrap -->
@@ -31,10 +31,9 @@
             </div>
         </div>
     </div>
-    <div class="row gamecontainer" ng-show="uiState == 'game'">
-        <div class="col-xs-12">
-            <button class="btn btn-success center-block" ng-click="uiState = 'splash'">End Game</button>
-        </div>
+    <div class="gamecontainer" ng-show="uiState == 'game'">
+        <!--<canvas class="gamecanvas" id="Gamefield" style="border-style: solid; border-width: 1px;" height={{gameHeight}} width={{gameWidth}}></canvas>-->
+        <canvas class="gamecanvas" id="Gamefield" height={{gameHeight}} width={{gameWidth}}></canvas>
     </div>
 
     <div class="row about-box" ng-show="uiState == 'about'">
@@ -46,7 +45,7 @@
         </p>
 
         <p>
-            This game is an experiment in making games using HTML5, Bootstrap and a couple of other cool things. I know it's a bit rough, but hey you don't need much to have fun, right?
+            This game is an experiment in making games using HTML5, Bootstrap and a couple of other cool things. You don't need much to have fun, right?
         </p>
 
         <p>
@@ -54,8 +53,12 @@
         </p>
 
         <p>
-            <button class="btn btn-success center-block" ng-click="uiState = 'splash'">Return</button>
+            <button class="btn btn-primary center-block" ng-click="uiState = 'splash'">Return</button>
         </p>
+    </div>
+
+    <div class="gameovercontainer" ng-show="uiState == 'gameover'">
+        <img class="fullscreenimg" src="images/gameover.jpg" />
     </div>
 
     <!-- Cordova reference, this is added to your app when it's built. -->
@@ -65,5 +68,10 @@
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/index.js"></script>
+    <script language="javascript" src="scripts/jquery.hotkeys-0.7.9.min.js" type="text/javascript"></script>
+    <script language="javascript" src="scripts/global.js" type="text/javascript"></script>
+    <script language="javascript" src="scripts/gamepieces.js" type="text/javascript"></script>
+    <script language="javascript" src="scripts/Common.js" type="text/javascript"></script>
+
 </body>
 </html>

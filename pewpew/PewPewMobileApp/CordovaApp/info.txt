@@ -1,3 +1,9 @@
+Node version: v0.12.5
+
+Cordova version: 5.1.1
+
+Config.xml file: 
+
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myapp8e2fd9c6f8a34aaaafd003a450a6fc00" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
   <name>Pew Pew</name>
@@ -98,3 +104,10 @@
   <preference name="Fullscreen" value="True" />
   <preference name="DisallowOverscroll" value="true" />
 </widget>
+
+No Plugins Currently Installed
+
+Error retrieving Android platform information: Error: cmd: Command failed with exit code 1 Error output:
+'android' is not recognized as an internal or external command,
+operable program or batch file.
+

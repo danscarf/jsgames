@@ -6,40 +6,62 @@
     top: 50%;
     left: 50%;
     transform: translate(-45%, -50%);
-    border: 8px solid #B8CB99;
+    border: 8px solid #808080;
     border-radius: 10px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     padding: 15px;
-    background-color: greenyellow;
+    /*background-color: greenyellow;*/
+    color: white;
 }
 
 .bgimg-starfield {
-    /*width: 100vw;
-    height: 100vh;*/
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-image: url("../images/starfield.jpg");
-    background-size: cover;
+    width: 100vw;
+    height: 100vh;
     height: 90vh;
 }
 
 .startbtncontainer {
-    background-color: orangered;
     height: 10vh;
 }
 
 .gamecontainer {
-    background-color: blueviolet;
+    background-color: black;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 100vw;
     height: 100vh;
 }
 
 .splash-container {
-    background-color: crimson;
+    /*background-color: crimson;*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-image: url("../images/starfield.jpg");
+    background-size: cover;
     height: 100vh;
+    width: 100vw;
 }
 
 .startbtnspacer {
     min-height: 2vh;
-    width: 100%;
+    width: 100vw;
+}
+
+.gamecanvas {
+    width: 100vw;
+    height: 100vh;
+}
+
+.gameovercontainer {
+    /*background-color: greenyellow;*/
+    height: 100vh;
+    width: 100vw;
+}
+
+.fullscreenimg {
+    max-width: 100%;
+    max-height: 100%;
 }

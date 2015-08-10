@@ -3,6 +3,12 @@
   <PropertyGroup>
     <ReferenceCachePath>C:\Users\dans\AppData\Local\Temp\AngualrJSToDo_refcache</ReferenceCachePath>
     <ShowAllFiles>true</ShowAllFiles>
-    <AutoRefresh>true</AutoRefresh>
+    <AutoRefresh>false</AutoRefresh>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
+    <DebuggerFlavor>AndroidDevice</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
+    <DebuggerFlavor>AndroidDevice</DebuggerFlavor>
   </PropertyGroup>
 </Project>
