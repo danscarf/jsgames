@@ -2,7 +2,7 @@
 <widget id="info.jsgames.artillery" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Artillery</name>
     <description>
-        A simple game where you use artillery to destroy targets over a varying mountain range.
+        A simple game where you use artillery to destroy targets over a varying mountain range and obstacles.
     </description>
     <author email="info@jsgames.info" href="http://www.jsgames.info">
         JSGames.info dev team
