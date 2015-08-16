@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ 
+ var height, width = 0;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -34,7 +36,9 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         // app.receivedEvent('deviceready');
-		var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
+		height = $(window).height();
+		width = $(window).width();
+		var game = new Phaser.Game(width, height, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
