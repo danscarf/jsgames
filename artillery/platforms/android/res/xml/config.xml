@@ -8,10 +8,10 @@
     <allow-intent href="market:*" />
     <name>Artillery</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        A simple game where you use artillery to destroy targets over a varying mountain range and obstacles.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="info@jsgames.info" href="http://www.jsgames.info">
+        JSGames.info dev team
     </author>
     <content src="index.html" />
     <access origin="*" />

@@ -33,7 +33,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+        // app.receivedEvent('deviceready');
+		var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -47,5 +48,16 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function preload() {
+console.log('preload');
+}
+
+function create() {
+console.log('create');
+}
+
+function update() {
+}
 
 app.initialize();
