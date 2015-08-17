@@ -15,9 +15,8 @@
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
  * under the License.
- */
- 
- var height, width = 0;
+ */ 
+var height, width = 0;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -38,7 +37,24 @@ var app = {
         // app.receivedEvent('deviceready');
 		height = $(window).height();
 		width = $(window).width();
-		var game = new Phaser.Game(width, height, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
+		// var game = new Phaser.Game(width, height, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
+		var game = new Phaser.Game(width, height, Phaser.AUTO, 'artillery');
+
+		// Game States
+		// game.state.add('boot', require('js/states/boot'));
+		// game.state.add('gameover', require('js/states/gameover'));
+		// game.state.add('menu', require('js/states/menu'));
+		// game.state.add('play', require('js/states/play'));
+		// game.state.add('preload', require('js/states/preload'));
+		
+		// Game States
+		game.state.add('boot', Boot);
+		game.state.add('gameover', GameOver);
+		game.state.add('menu', Menu);
+		game.state.add('play', Play);
+		game.state.add('preload', Preload);
+		
+		game.state.start('boot');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
