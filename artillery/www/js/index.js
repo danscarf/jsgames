@@ -41,13 +41,6 @@ var app = {
 		var game = new Phaser.Game(width, height, Phaser.AUTO, 'artillery');
 
 		// Game States
-		// game.state.add('boot', require('js/states/boot'));
-		// game.state.add('gameover', require('js/states/gameover'));
-		// game.state.add('menu', require('js/states/menu'));
-		// game.state.add('play', require('js/states/play'));
-		// game.state.add('preload', require('js/states/preload'));
-		
-		// Game States
 		game.state.add('boot', Boot);
 		game.state.add('gameover', GameOver);
 		game.state.add('menu', Menu);
