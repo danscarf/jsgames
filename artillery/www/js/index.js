@@ -53,6 +53,7 @@ var app = {
 		game.state.add('menu', Menu);
 		game.state.add('play', Play);
 		game.state.add('preload', Preload);
+		game.state.add('scores', Scores);
 		
 		game.state.start('boot');
     },
