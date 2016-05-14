@@ -14,6 +14,18 @@ Preload.prototype = {
     this.load.setPreloadSprite(this.asset);
     this.load.image('yeoman', 'assets/yeoman-logo.png');
 
+    this.load.image('bullet', 'assets/bullets.png');
+    this.load.image('ship', 'assets/ship.png');
+
+
+    this.load.image('tank', 'assets/tank.png');
+    this.load.image('turret', 'assets/turret.png');
+    this.load.image('bullet', 'assets/bullet.png');
+    this.load.image('background', 'assets/background.png');
+    this.load.image('flame', 'assets/flame.png');
+    this.load.image('target', 'assets/target.png');
+
+
   },
   create: function() {
     this.asset.cropEnabled = false;

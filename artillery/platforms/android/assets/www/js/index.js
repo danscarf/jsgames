@@ -17,6 +17,7 @@
  * under the License.
  */ 
 var height, width = 0;
+var game;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -35,18 +36,15 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         // app.receivedEvent('deviceready');
-		height = $(window).height();
-		width = $(window).width();
-		// var game = new Phaser.Game(width, height, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
-		var game = new Phaser.Game(width, height, Phaser.AUTO, 'artillery');
+		// height = $(window).height();
+		// width = $(window).width();
 
-		// Game States
-		// game.state.add('boot', require('js/states/boot'));
-		// game.state.add('gameover', require('js/states/gameover'));
-		// game.state.add('menu', require('js/states/menu'));
-		// game.state.add('play', require('js/states/play'));
-		// game.state.add('preload', require('js/states/preload'));
-		
+        height = window.screen.height;
+        width = window.screen.width;
+
+		// var game = new Phaser.Game(width, height, Phaser.AUTO, 'game', { preload: preload, create: create, update: update });
+		game = new Phaser.Game(width, height, Phaser.AUTO, 'artillery');
+
 		// Game States
 		game.state.add('boot', Boot);
 		game.state.add('gameover', GameOver);

@@ -13,7 +13,6 @@ Scores.prototype = {
         this.mainMenuText.anchor.setTo(0.5, 0.5);
         this.mainMenuText.inputEnabled = true;
         this.mainMenuText.events.onInputDown.add(this.mainMenu, this);
-
     },
 
     update: function () {
