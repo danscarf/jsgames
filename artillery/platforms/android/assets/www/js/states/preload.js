@@ -25,6 +25,9 @@ Preload.prototype = {
         this.load.image('flame', 'assets/flame.png');
         this.load.image('target', 'assets/target.png');
 
+        this.load.image('firebutton', 'assets/firebutton.png');
+        
+
 
     },
     create: function () {
