@@ -14,9 +14,6 @@ function Play() {
 
     this.power = null;
     this.powerText = null;
-
-    this.cursors = null;
-
     
     this.buttonSize = 35;
     this.buttonAlpha = 0.75;
@@ -39,7 +36,6 @@ function Play() {
 Play.prototype = {
     init: function () {
 
-        // console.log('play.init() called.');
         game.renderer.renderSession.roundPixels = true;
 
         game.world.setBounds(0, 0, game.width * 2, game.height);
@@ -49,8 +45,6 @@ Play.prototype = {
 
     },
     create: function () {
-
-        // console.log('play.create() called.');
 
         //  Simple but pretty background
         var bgHeight = game.cache.getImage('background', true).frame.sourceSizeH;
@@ -113,7 +107,7 @@ Play.prototype = {
 
         // Fire button
         var fbXPos = (game.width * .95) - this.buttonSize;
-        var fbYPos = (gameHeight * .95) - this.buttonSize;
+        var fbYPos = (gameHeight * .6) - this.buttonSize;
         this.fireButton = this.add.sprite(fbXPos, fbYPos, 'firebutton');
         this.fireButton.height = this.buttonSize;
         this.fireButton.width = this.buttonSize;
@@ -136,20 +130,56 @@ Play.prototype = {
         this.upButton.events.onInputUp.add(function () { this.up = false; }, this);
         // End Up button
 
+        // Down button
+        var downXPos = (game.width * .15) - this.buttonSize;
+        var downYPos = (gameHeight * .7) - this.buttonSize;
+        this.downButton = this.add.sprite(downXPos, downYPos, 'downbutton');
+        this.downButton.height = this.buttonSize;
+        this.downButton.width = this.buttonSize;
+        this.downButton.alpha = this.buttonAlpha;
+        this.downButton.inputEnabled = true;
+        this.downButton.fixedToCamera = true;
+        this.downButton.events.onInputDown.add(function () { this.down = true; }, this);
+        this.downButton.events.onInputUp.add(function () { this.down = false; }, this);
+        // End Down button
 
-        //  Some basic controls
-        this.cursors = this.input.keyboard.createCursorKeys();
+        // Left button
+        var leftXPos = (game.width * .1) - this.buttonSize;
+        var leftYPos = (gameHeight * .6) - this.buttonSize;
+        this.leftButton = this.add.sprite(leftXPos, leftYPos, 'leftbutton');
+        this.leftButton.height = this.buttonSize;
+        this.leftButton.width = this.buttonSize;
+        this.leftButton.alpha = this.buttonAlpha;
+        this.leftButton.inputEnabled = true;
+        this.leftButton.fixedToCamera = true;
+        this.leftButton.events.onInputDown.add(function () { this.left = true; }, this);
+        this.leftButton.events.onInputUp.add(function () { this.left = false; }, this);
+        // End Left button
+
+        // Right button
+        var rightXPos = (game.width * .2) - this.buttonSize;
+        var rightYPos = (gameHeight * .6) - this.buttonSize;
+        this.rightButton = this.add.sprite(rightXPos, rightYPos, 'rightbutton');
+        this.rightButton.height = this.buttonSize;
+        this.rightButton.width = this.buttonSize;
+        this.rightButton.alpha = this.buttonAlpha;
+        this.rightButton.inputEnabled = true;
+        this.rightButton.fixedToCamera = true;
+        this.rightButton.events.onInputDown.add(function () { this.right = true; }, this);
+        this.rightButton.events.onInputUp.add(function () { this.right = false; }, this);
+        // Right Left button
 
         // Exit stuff. Delete when ready
         var exitW = 40;
         var exitH = 28
-        var exitXPos = (game.width / 2) - exitW / 2;
-        var exitYPos = (gameHeight / 2) - exitH / 2;
+        var exitXPos = game.width - exitW - (game.width * .05);
+        var exitYPos = (gameHeight * .3) - exitH;
 
         this.exit = this.add.sprite(exitXPos, exitYPos, 'exit');
         this.exit.width = exitW;
         this.exit.height = exitH;
         this.exit.inputEnabled = true;
+        this.exit.fixedToCamera = true;
         this.exit.events.onInputDown.add(this.gameOver, this);
         // End exit stuff
     },
@@ -185,7 +215,6 @@ Play.prototype = {
 
         //  Our launch trajectory is based on the angle of the turret and the power
         this.physics.arcade.velocityFromRotation(this.turret.rotation, this.power, this.bullet.body.velocity);
-
     },
 
     /**
@@ -233,18 +262,18 @@ Play.prototype = {
         }
         else {
             //  Allow them to set the power between 100 and 500
-            if (this.cursors.left.isDown && this.power > 100) {
+            if (this.left == true && this.power > 100) {
                 this.power -= 2;
             }
-            else if (this.cursors.right.isDown && this.power < 500) {
+            else if (this.right == true && this.power < 500) {
                 this.power += 2;
             }
 
             //  Allow them to set the angle, between -90 (straight up) and 0 (facing to the right)
-            if ((this.cursors.up.isDown || this.up == true) && this.turret.angle > -90) {
+            if (this.up == true && this.turret.angle > -90) {
                 this.turret.angle--;
             }
-            else if (this.cursors.down.isDown && this.turret.angle < 0) {
+            else if (this.down == true && this.turret.angle < 0) {
                 this.turret.angle++;
             }
 
