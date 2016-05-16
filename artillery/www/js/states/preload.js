@@ -28,8 +28,10 @@ Preload.prototype = {
         this.load.image('firebutton', 'assets/firebutton.png');
         this.load.image('exit', 'assets/exit.png');
         
-
-
+        this.load.image('upbutton', 'assets/upbutton.png');
+        this.load.image('downbutton', 'assets/downbutton.png');
+        this.load.image('leftbutton', 'assets/leftbutton.png');
+        this.load.image('rightbutton', 'assets/rightbutton.png');
     },
     create: function () {
         this.asset.cropEnabled = false;

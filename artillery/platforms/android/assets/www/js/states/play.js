@@ -10,13 +10,28 @@ function Play() {
     this.background = null;
     this.targets = null;
 
-    this.textStyle = new Object({ font: "18px Arial", fill: "#ffffff" });
+    this.textStyle = { font: "18px Arial", fill: "#ffffff" };
 
     this.power = null;
     this.powerText = null;
 
     this.cursors = null;
+
+    
+    this.buttonSize = 35;
+    this.buttonAlpha = 0.75;
     this.fireButton = null;
+    this.upButton = null;
+    this.up = false;
+
+    this.downButton = null;
+    this.down = false;
+
+    this.leftButton = null;
+    this.left = false;
+
+    this.rightButton = null;
+    this.right = false;
 
     this.score = 0;
     this.scoreText = null;
@@ -27,7 +42,7 @@ Play.prototype = {
         // console.log('play.init() called.');
         game.renderer.renderSession.roundPixels = true;
 
-        // game.world.setBounds(0, 0, 992, 480);
+        game.world.setBounds(0, 0, game.width * 2, game.height);
 
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.gravity.y = 200;
@@ -49,16 +64,16 @@ Play.prototype = {
         this.background.x = 0;
         this.background.y = 0;
         this.background.height = game.height;
-        this.background.width = game.width;
+        this.background.width = game.world.width;
 
         //  Something to shoot at :)
         this.targets = this.add.group(this.game.world, 'targets', false, true, Phaser.Physics.ARCADE);
         var targetHeight = game.cache.getImage('target', true).frame.sourceSizeH;
         var targetYPos = gameHeight - targetHeight;
-        this.targets.create(game.width * .2, targetYPos, 'target');
-        this.targets.create(game.width * .4, targetYPos, 'target');
-        this.targets.create(game.width * .6, targetYPos, 'target');
-        this.targets.create(game.width * .8, targetYPos, 'target');
+        this.targets.create(game.world.width * .2, targetYPos, 'target');
+        this.targets.create(game.world.width * .4, targetYPos, 'target');
+        this.targets.create(game.world.width * .6, targetYPos, 'target');
+        this.targets.create(game.world.width * .8, targetYPos, 'target');
 
         //  Stop gravity from pulling them away
         this.targets.setAll('body.allowGravity', false);
@@ -81,28 +96,46 @@ Play.prototype = {
         this.flame.anchor.set(0.5);
         this.flame.visible = false;
 
-        //  Used to display the power of the shot
+        //  Display the power of the shot
         this.power = 300;
         this.powerText = this.add.text(8, 8, 'Power: 300', this.textStyle);
         this.powerText.setShadow(1, 1, 'rgba(0, 0, 0, 0.8)', 1);
         this.powerText.fixedToCamera = true;
+        //  End Display the power of the shot
 
         // Display the score
         this.score = 0;
         this.scoreText = this.add.text(0, 8, 'Score: ' + this.score, this.textStyle);
         this.scoreText.x = game.width - this.scoreText.width - 42;
-        this.powerText.setShadow(1, 1, 'rgba(0, 0, 0, 0.8)', 1);
-        this.powerText.fixedToCamera = true;
+        this.scoreText.setShadow(1, 1, 'rgba(0, 0, 0, 0.8)', 1);
+        this.scoreText.fixedToCamera = true;
+        // End Display the score
 
         // Fire button
-        var fbSize = 50;
-        var fbXPos = (game.width * .95) - fbSize;
-        var fbYPos = (gameHeight * .95) - fbSize;
+        var fbXPos = (game.width * .95) - this.buttonSize;
+        var fbYPos = (gameHeight * .95) - this.buttonSize;
         this.fireButton = this.add.sprite(fbXPos, fbYPos, 'firebutton');
-        this.fireButton.height = fbSize;
-        this.fireButton.width = fbSize;
+        this.fireButton.height = this.buttonSize;
+        this.fireButton.width = this.buttonSize;
+        this.fireButton.alpha = this.buttonAlpha;
         this.fireButton.inputEnabled = true;
+        this.fireButton.fixedToCamera = true;
         this.fireButton.events.onInputDown.add(this.fire, this);
+        // End fire button
+
+        // Up button
+        var upXPos = (game.width * .15) - this.buttonSize;
+        var upYPos = (gameHeight * .5) - this.buttonSize;
+        this.upButton = this.add.sprite(upXPos, upYPos, 'upbutton');
+        this.upButton.height = this.buttonSize;
+        this.upButton.width = this.buttonSize;
+        this.upButton.alpha = this.buttonAlpha;
+        this.upButton.inputEnabled = true;
+        this.upButton.fixedToCamera = true;
+        this.upButton.events.onInputDown.add(function () { this.up = true; }, this);
+        this.upButton.events.onInputUp.add(function () { this.up = false; }, this);
+        // End Up button
+
 
         //  Some basic controls
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -199,16 +232,16 @@ Play.prototype = {
             }
         }
         else {
-            //  Allow them to set the power between 100 and 600
+            //  Allow them to set the power between 100 and 500
             if (this.cursors.left.isDown && this.power > 100) {
                 this.power -= 2;
             }
-            else if (this.cursors.right.isDown && this.power < 600) {
+            else if (this.cursors.right.isDown && this.power < 500) {
                 this.power += 2;
             }
 
             //  Allow them to set the angle, between -90 (straight up) and 0 (facing to the right)
-            if (this.cursors.up.isDown && this.turret.angle > -90) {
+            if ((this.cursors.up.isDown || this.up == true) && this.turret.angle > -90) {
                 this.turret.angle--;
             }
             else if (this.cursors.down.isDown && this.turret.angle < 0) {
@@ -225,5 +258,8 @@ Play.prototype = {
         // Clean up resizing world bounds after game is over.
         game.world.setBounds(0, 0, game.width, game.height);
         game.state.start('gameover');
+    },
+    upClicked: function () {
+        this.up = true;
     }
 };
