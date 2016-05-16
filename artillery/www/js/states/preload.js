@@ -26,6 +26,7 @@ Preload.prototype = {
         this.load.image('target', 'assets/target.png');
 
         this.load.image('firebutton', 'assets/firebutton.png');
+        this.load.image('exit', 'assets/exit.png');
         
 
 

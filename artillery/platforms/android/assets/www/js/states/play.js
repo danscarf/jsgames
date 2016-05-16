@@ -5,15 +5,21 @@ function Play() {
     this.turret = null;
     this.flame = null;
     this.bullet = null;
+    this.exit = null;
 
     this.background = null;
     this.targets = null;
 
-    this.power = 300;
+    this.textStyle = new Object({ font: "18px Arial", fill: "#ffffff" });
+
+    this.power = null;
     this.powerText = null;
 
     this.cursors = null;
     this.fireButton = null;
+
+    this.score = 0;
+    this.scoreText = null;
 }
 Play.prototype = {
     init: function () {
@@ -77,7 +83,14 @@ Play.prototype = {
 
         //  Used to display the power of the shot
         this.power = 300;
-        this.powerText = this.add.text(8, 8, 'Power: 300', { font: "18px Arial", fill: "#ffffff" });
+        this.powerText = this.add.text(8, 8, 'Power: 300', this.textStyle);
+        this.powerText.setShadow(1, 1, 'rgba(0, 0, 0, 0.8)', 1);
+        this.powerText.fixedToCamera = true;
+
+        // Display the score
+        this.score = 0;
+        this.scoreText = this.add.text(0, 8, 'Score: ' + this.score, this.textStyle);
+        this.scoreText.x = game.width - this.scoreText.width - 42;
         this.powerText.setShadow(1, 1, 'rgba(0, 0, 0, 0.8)', 1);
         this.powerText.fixedToCamera = true;
 
@@ -94,20 +107,18 @@ Play.prototype = {
         //  Some basic controls
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // Exit stuff. Delete when ready
+        var exitW = 40;
+        var exitH = 28
+        var exitXPos = (game.width / 2) - exitW / 2;
+        var exitYPos = (gameHeight / 2) - exitH / 2;
 
-
-        // Yeoman stuff
-        this.sprite = game.add.sprite(game.width / 2, game.height / 2, 'yeoman');
-        this.sprite.inputEnabled = true;
-        game.physics.arcade.enable(this.sprite);
-        this.sprite.body.collideWorldBounds = true;
-        this.sprite.body.bounce.setTo(1, 1);
-        this.sprite.body.velocity.x = game.rnd.integerInRange(-500, 500);
-        this.sprite.body.velocity.y = game.rnd.integerInRange(-500, 500);
-        this.sprite.events.onInputDown.add(this.clickListener, this);
-        this.sprite.body.allowGravity = false;
-
-        // End Yeoman stuff
+        this.exit = this.add.sprite(exitXPos, exitYPos, 'exit');
+        this.exit.width = exitW;
+        this.exit.height = exitH;
+        this.exit.inputEnabled = true;
+        this.exit.events.onInputDown.add(this.gameOver, this);
+        // End exit stuff
     },
     /**
  * Called by fireButton.onDown
@@ -155,6 +166,10 @@ Play.prototype = {
 
         target.kill();
         this.removeBullet();
+
+        // Handle score
+        this.score += 10;
+        this.scoreText.text = 'Score: ' + this.score;
     },
 
     /**
@@ -205,7 +220,7 @@ Play.prototype = {
         }
     },
 
-    clickListener: function () {
+    gameOver: function () {
 
         // Clean up resizing world bounds after game is over.
         game.world.setBounds(0, 0, game.width, game.height);
