@@ -32,6 +32,8 @@ Preload.prototype = {
         this.load.image('downbutton', 'assets/downbutton.png');
         this.load.image('leftbutton', 'assets/leftbutton.png');
         this.load.image('rightbutton', 'assets/rightbutton.png');
+
+        this.load.audio('menutheme', 'assets/menutheme.mp3');
     },
     create: function () {
         this.asset.cropEnabled = false;

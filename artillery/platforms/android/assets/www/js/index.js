@@ -30,6 +30,10 @@ var app = {
     bindEvents: function () {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
+    //quitApp: function(){
+    //    navigator.app.exitApp();
+    //},
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
@@ -38,7 +42,7 @@ var app = {
         // app.receivedEvent('deviceready');
         // height = $(window).height();
         // width = $(window).width();
-
+        //document.addEventListener('pause', this.quitApp, false);
         height = window.screen.height;
         width = window.screen.width;
 

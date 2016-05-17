@@ -1,6 +1,8 @@
 
 'use strict';
-function Menu() { }
+function Menu() {
+    this.music = null;
+}
 
 Menu.prototype = {
     preload: function () {
@@ -14,14 +16,19 @@ Menu.prototype = {
         this.titleText = this.game.add.text(this.game.world.centerX, 300, 'Artillery - Blow some stuff up!', style);
         this.titleText.anchor.setTo(0.5, 0.5);
 
-        this.instructionsText = this.game.add.text(this.game.world.centerX, 400, 'Click anywhere to play "Click The Yeoman Logo"', { font: '16px Arial', fill: '#ffffff', align: 'center' });
-        this.instructionsText.anchor.setTo(0.5, 0.5);
-
         this.sprite.angle = -20;
         this.game.add.tween(this.sprite).to({ angle: 20 }, 1000, Phaser.Easing.Linear.NONE, true, 0, 1000, true);
+
+        this.music = this.game.add.audio('menutheme');
+        this.music.onDecoded.add(this.startMusic, this);
+
+    },
+    startMusic: function () {
+        this.music.fadeIn(2000);
     },
     update: function () {
         if (this.game.input.activePointer.justPressed()) {
+            this.music.fadeIn(1000);
             this.game.state.start('play');
         }
     }
