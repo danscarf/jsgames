@@ -34,6 +34,11 @@ Preload.prototype = {
         this.load.image('rightbutton', 'assets/rightbutton.png');
 
         this.load.audio('menutheme', 'assets/menutheme.mp3');
+
+        // Level data
+        game.load.text('l1', '/levels/L1.json');
+        game.load.text('l2', '/levels/L1.json');
+        // End Level data
     },
     create: function () {
         this.asset.cropEnabled = false;

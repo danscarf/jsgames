@@ -12,6 +12,10 @@ LevelSelect.prototype = {
         this.titleText.inputEnabled = true;
         this.titleText.events.onInputDown.add(this.mainMenu, this);
 
+        var l1Data = JSON.parse(game.cache.getText("l1"));
+        var l2Data = JSON.parse(game.cache.getText("l2"));
+        this.titleText = this.game.add.text(this.game.world.centerX, 300, l1Data.name, style);
+
 
     },
     update: function () {
