@@ -13,10 +13,12 @@ Menu.prototype = {
         this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'yeoman');
         this.sprite.anchor.setTo(0.5, 0.5);
         this.sprite.inputEnabled = true;
-        this.sprite.events.onInputDown.add(this.levelSelect, this);
+        this.sprite.events.onInputDown.add(this.play, this);
 
-        this.titleText = this.game.add.text(this.game.world.centerX, 300, 'Artillery - Blow some stuff up!', style);
+        this.titleText = this.game.add.text(this.game.world.centerX, 300, 'Select your level!', style);
         this.titleText.anchor.setTo(0.5, 0.5);
+        this.titleText.inputEnabled = true;
+        this.titleText.events.onInputDown.add(this.levelSelect, this);
 
         this.sprite.angle = -20;
         this.game.add.tween(this.sprite).to({ angle: 20 }, 1000, Phaser.Easing.Linear.NONE, true, 0, 1000, true);
@@ -33,6 +35,10 @@ Menu.prototype = {
         //    this.game.state.start('play');
         //}
     },
+    play: function(){
+        this.game.state.start('play');
+    },
+
     levelSelect: function () {
         this.game.state.start('levelselect');
     }
