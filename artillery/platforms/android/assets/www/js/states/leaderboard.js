@@ -1,8 +1,8 @@
 ﻿'use strict';
 
-function Scores() { }
+function Leaderboard() { }
 
-Scores.prototype = {
+Leaderboard.prototype = {
     create: function () {
 
         var style = { font: '32px Arial', fill: '#ffffff', align: 'center' };

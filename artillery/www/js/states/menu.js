@@ -12,6 +12,8 @@ Menu.prototype = {
         var style = { font: '30px Arial', fill: '#ffffff', align: 'center' };
         this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'yeoman');
         this.sprite.anchor.setTo(0.5, 0.5);
+        this.sprite.inputEnabled = true;
+        this.sprite.events.onInputDown.add(this.levelSelect, this);
 
         this.titleText = this.game.add.text(this.game.world.centerX, 300, 'Artillery - Blow some stuff up!', style);
         this.titleText.anchor.setTo(0.5, 0.5);
@@ -21,15 +23,18 @@ Menu.prototype = {
 
         this.music = this.game.add.audio('menutheme');
         this.music.onDecoded.add(this.startMusic, this);
-
     },
     startMusic: function () {
         this.music.fadeIn(2000);
     },
     update: function () {
-        if (this.game.input.activePointer.justPressed()) {
-            this.music.fadeIn(1000);
-            this.game.state.start('play');
-        }
+        //if (this.game.input.activePointer.justPressed()) {
+        //    this.music.fadeIn(1000);
+        //    this.game.state.start('play');
+        //}
+    },
+    levelSelect: function () {
+        this.game.state.start('levelselect');
     }
+
 };

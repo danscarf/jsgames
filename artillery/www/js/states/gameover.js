@@ -11,10 +11,10 @@ GameOver.prototype = {
         this.GameOverText = this.game.add.text(this.game.world.centerX, 100, 'Game Over!', style);
         this.GameOverText.anchor.setTo(0.5, 0.5);
 
-        this.highScoresText = this.game.add.text(this.game.world.centerX, 200, 'View High Scores', { font: '20px Arial', fill: '#ffffff', align: 'center' });
-        this.highScoresText.anchor.setTo(0.5, 0.5);
-        this.highScoresText.inputEnabled = true;
-        this.highScoresText.events.onInputDown.add(this.highScores, this);
+        this.leaderboardText = this.game.add.text(this.game.world.centerX, 200, 'Leaderboard', { font: '20px Arial', fill: '#ffffff', align: 'center' });
+        this.leaderboardText.anchor.setTo(0.5, 0.5);
+        this.leaderboardText.inputEnabled = true;
+        this.leaderboardText.events.onInputDown.add(this.leaderboard, this);
 
         this.mainMenuText = this.game.add.text(this.game.world.centerX, 300, 'Main Menu', { font: '20px Arial', fill: '#ffffff', align: 'center' });
         this.mainMenuText.anchor.setTo(0.5, 0.5);
@@ -31,8 +31,8 @@ GameOver.prototype = {
         //  this.game.state.start('play');
         //}
     },
-    highScores: function () {
-        this.game.state.start('scores');
+    leaderboard: function () {
+        this.game.state.start('leaderboard');
     },
     mainMenu: function () {
         this.game.state.start('menu');
