@@ -88,6 +88,7 @@ function createApp() {
             game.state.add('play', Play);
             game.state.add('preload', Preload);
             game.state.add('leaderboard', Leaderboard);
+            game.state.add('levelselect', LevelSelect);
 
             game.state.start('boot');
         },
