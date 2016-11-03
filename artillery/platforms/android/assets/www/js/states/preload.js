@@ -37,7 +37,9 @@ Preload.prototype = {
 
         // Level data
         game.load.text('l1', '/levels/L1.json');
-        game.load.text('l2', '/levels/L1.json');
+        game.load.text('l2', '/levels/L2.json');
+        game.load.text('l3', '/levels/L3.json');
+        game.load.text('l4', '/levels/L4.json');
         // End Level data
     },
     create: function () {

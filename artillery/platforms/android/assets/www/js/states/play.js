@@ -1,6 +1,7 @@
 'use strict';
 function Play() {
 
+    
     this.tank = null;
     this.turret = null;
     this.flame = null;
@@ -35,6 +36,7 @@ function Play() {
 }
 Play.prototype = {
     init: function () {
+        console.log(arguments[0]);
 
         game.renderer.renderSession.roundPixels = true;
 

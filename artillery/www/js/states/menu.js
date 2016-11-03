@@ -8,6 +8,9 @@ Menu.prototype = {
     preload: function () {
 
     },
+    init: function () {
+    },
+
     create: function () {
         var style = { font: '30px Arial', fill: '#ffffff', align: 'center' };
         this.sprite = this.game.add.sprite(this.game.world.centerX, 138, 'yeoman');
@@ -35,8 +38,8 @@ Menu.prototype = {
         //    this.game.state.start('play');
         //}
     },
-    play: function(){
-        this.game.state.start('play');
+    play: function () {
+        this.game.state.start('play', false, false, "Starting Play state from menu state.");
     },
 
     levelSelect: function () {
